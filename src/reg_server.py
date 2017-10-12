@@ -79,10 +79,21 @@ class Server:
         self.update_records(False, hostname, cookie, rfc_server_port)
 
     def process_pquery(self, msg, conn):
-        pass
+        '''
+            Message format: "PQuery<sp>cookie"
+        '''
+        cookie = msg.split()[1]
+        peerlist = self.fetch_peer_list() # peerlist: dict
+        conn.send(peerlist)
     
     def process_keepalive(self, msg, conn):
-        pass
+        '''
+            Message format: "Keepalive<sp>hostname<sp>cookie<sp>"
+        '''
+        hostname = msg.split()[1]
+        cookie = msg.split()[2]
+        status = self.updateFile(hostname, cookie)
+        # ToDo: Manage timing of client.
     
     def update_records(self, isReg, hostname, cookie, rfc_server_port):
         # Use this method for "Register" and "Leave" messages.
