@@ -43,30 +43,51 @@ class Server:
         
     def process_request(self, conn):
         msg = conn.recv(4096)
-        if msg.split()[0] == "register":
+        if msg.split()[0] == "Register":
             self.process_reg(msg, conn)
-        elif msg.split()[0] == "leave":
+        elif msg.split()[0] == "Leave":
             self.process_leave(msg, conn)
-        elif msg.split()[0] == "pquery":
+        elif msg.split()[0] == "PQuery":
             self.process_pquery(msg, conn)
-        elif msg.split()[0] == "keepalive":
+        elif msg.split()[0] == "Keepalive":
             self.process_keepalive(msg, conn)
 
     def process_reg(self, msg, conn):
         '''
-        Message format: "Register<sp>hostname<sp>cookie<sp>rfcserverport"
+            Message format: "Register<sp>hostname<sp>cookie<sp>rfc_server_port"
         '''
         # conn.send() of new/existing cookie value.
-        self.update_records('''param?''')
+        # Extract cookie, hostname, RFC Server port and update records.
+        hostname = msg.split()[1]
+        cookie = msg.split()[2]
+        if cookie == None or cookie == "":
+            cookie = create_cookie()
+        rfc_server_port = msg.split()[3]
+        if self.update_records(True, hostname, cookie, rfc_server_port):
+            reg_reply = "Register " + str(cookie)
+            conn.send(reg_reply)
+        else:
+            pass # ToDo: Better error message back to the client.
 
     def process_leave(self, msg, conn):
-        pass
+        '''
+            Message format: "Leave<sp>hostname<sp>cookie<sp>rfc_server_port"
+        '''
+        hostname = msg.split()[1]
+        cookie = msg.split()[2]
+        rfc_server_port = msg.split()[3]
+        self.update_records(False, hostname, cookie, rfc_server_port)
 
     def process_pquery(self, msg, conn):
         pass
     
     def process_keepalive(self, msg, conn):
         pass
+    
+    def update_records(self, isReg, hostname, cookie, rfc_server_port):
+        # Use this method for "Register" and "Leave" messages.
+        # If isReg is True, this is a register request. Else, leave request.
+        
  
 
 def main():
@@ -79,6 +100,7 @@ if __name__ == '__main__':
 
 # Create main_loop which runs forever.
 # Accept connections and create a thread to process the request.
+
 
 
 
