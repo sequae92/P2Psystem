@@ -78,9 +78,12 @@ class Server:
             Message format: "Leave<sp>hostname<sp>cookie<sp>rfc_server_port"
         '''
         hostname = msg.split()[1]
-        cookie = msg.split()[2]
+        cookie = int(msg.split()[2])
         rfc_server_port = msg.split()[3]
-        self.update_records(False, hostname, cookie, rfc_server_port)
+        if self.update_records(False, hostname, cookie, rfc_server_port):
+            conn.send("Leave-OK")
+        else:
+            conn.send("Leave-Fail")
 
     def process_pquery(self, msg, conn):
         '''
@@ -103,8 +106,8 @@ class Server:
         # Use this method for "Register" and "Leave" messages.
         if isReg:
             # Check if peer is already present using cookie.
-            peer = self.find_peer(int(cookie))
-            if peer == None:
+            peer = self.find_peer(cookie)
+            if not peer:
                 peer_exists = False
                 peer = Peer(hostname, cookie, rfc_server_port)
             else:
@@ -118,6 +121,18 @@ class Server:
                 self.peerlist.append(peer)
                 print self.peerlist
             return True
+        else:
+            print cookie, self.find_peer(cookie)
+            peer = self.find_peer(cookie)
+            if not peer:
+                return False
+            else:
+                if peer.flag == False:
+                    # A peer that is inactive wants to leave. Return False.
+                    return False
+                peer.flag = False
+                peer.ttl = 0
+                return True
 
     def find_peer(self, cookie):
         for i in self.peerlist:
