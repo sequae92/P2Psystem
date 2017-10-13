@@ -1,22 +1,38 @@
 #This script file describes the client side functioning of a P2P system
 #client.py
 
+import sys
+from datetime import *
 import socket
 
-#setting up the socket connection
-s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-#host = socket.gethostname() // 154.46.20.237
+class Client()
+{
+#initialize all instance variables
+def __init__(self,port,hostname,cookie,flag1,flag2):
+	self.port = port
+	self.hostname = hostname
+	self.cookie = cookie
+	self.flag1 = flag1
+	self.flag2 = flag2
 
-#assigning the hostname of the RS server and the port 
-host = "152.46.20.237"
-port = 65423
+#start the socket connection
+def start_conn():
+	s= socket.socket.AF_INET,socket.SOCK_STREAM)
+        hostname = socket.gethostname()
+	s.connect((hostname,port))
+	print("Connection to RS is successful")
 
-s.connect((host,port))
-print('Connection successful')
-s.sendall("Hello, Server")
+#send and receive data after connection is setup
+def send_receive():
+	s.sendall("Hello,Server")
+	data = s.recv(1024)
+	print("Received data from the RS",repr(data))
 
-data = s.recv(1024)
-s.close()
+def client_register():
+	
 
-print("Received data from the server %s",repr(data))
+def client_pquery():
 
+def client_keepalive():
+
+def client_leave():
