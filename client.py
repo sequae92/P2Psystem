@@ -5,8 +5,8 @@ import sys
 from datetime import *
 import socket
 
-class Client()
-{
+class Client:
+
 #initialize all instance variables
 def __init__(self,port,hostname,cookie,flag1,flag2):
 	self.port = port
