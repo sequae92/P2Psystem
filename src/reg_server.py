@@ -62,12 +62,13 @@ class Server:
         # conn.send() of new/existing cookie value.
         # Extract cookie, hostname, RFC Server port and update records.
         hostname = msg.split()[1]
-        cookie = msg.split()[2]
-        if cookie == None or cookie == "0":
-            cookie = create_cookie()
+        cookie = int(msg.split()[2])
+        # If cookie is not a number or something negative, return an error to the client
+        if cookie == 0:
+            cookie = self.create_cookie()
         rfc_server_port = msg.split()[3]
         if self.update_records(True, hostname, cookie, rfc_server_port):
-            reg_reply = "Register " + str(cookie)
+            reg_reply = "Register-OK " + str(cookie)
             conn.send(reg_reply)
         else:
             pass # ToDo: Better error message back to the client.
@@ -102,13 +103,21 @@ class Server:
         # Use this method for "Register" and "Leave" messages.
         if isReg:
             # Check if peer is already present using cookie.
-            peer = find_peer(int(cookie))
+            peer = self.find_peer(int(cookie))
             if peer == None:
+                peer_exists = False
                 peer = Peer(hostname, cookie, rfc_server_port)
+            else:
+                peer_exists = True
             peer.ttl = 7200
             peer.flag = True
             peer.latest_register = datetime.now().strftime('%s')
             peer.num_registers += 1
+            
+            if not peer_exists:
+                self.peerlist.append(peer)
+                print self.peerlist
+            return True
 
     def find_peer(self, cookie):
         for i in self.peerlist:
@@ -133,8 +142,8 @@ class Peer:
 
 
 def main():
-    PORT_NUM = 65423
-    s = Server(PORT_NUM)
+    port = 65423
+    s = Server(port)
     s.create_and_bind_socket()
     s.main_loop()
 if __name__ == '__main__':

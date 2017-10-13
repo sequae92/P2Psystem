@@ -1,5 +1,6 @@
 from socket import *
 sock = socket(AF_INET, SOCK_STREAM)
-sock.connect(('152.46.20.237' , 65423))
-sock.sendall('register this')
+sock.connect(('' , 65423))
+hostname = gethostname()
+sock.sendall("Register "+hostname+" 2 65500")
 print sock.recv(4096)
