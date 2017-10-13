@@ -97,9 +97,16 @@ class Server:
         '''
             Message format: "Keepalive<sp>hostname<sp>cookie<sp>"
         '''
+        # What if a peer sends a keepalive after being inactive? Shouldn't it register first?
         hostname = msg.split()[1]
-        cookie = msg.split()[2]
-        status = self.updateFile(hostname, cookie)
+        cookie = int(msg.split()[2])
+        peer = self.find_peer(cookie)
+        if not peer:
+            conn.send("Keepalive-Fail")
+        else:
+            peer.ttl = 7200
+            peer.flag = True    # Set flag to true irrespective of what it was.
+        
         # ToDo: Manage timing of client.
     
     def update_records(self, isReg, hostname, cookie, rfc_server_port):
