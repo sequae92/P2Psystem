@@ -89,9 +89,13 @@ class Server:
         '''
             Message format: "PQuery<sp>cookie"
         '''
-        cookie = msg.split()[1]
-        peerlist = self.fetch_peer_list() # peerlist: dict
-        conn.send(peerlist)
+        cookie = int(msg.split()[1])
+        if not self.find_peer(cookie):
+            conn.send("PQuery-Fail")
+        peerlist = "PQuery-OK "
+        for i in self.peerlist:
+            peerlist += str(i.hostname) + "," + str(i.rfc_server_port) + " "
+        conn.send(peerlist.strip())
     
     def process_keepalive(self, msg, conn):
         '''
@@ -128,7 +132,6 @@ class Server:
                 self.peerlist.append(peer)
             return True
         else:
-            print cookie, self.find_peer(cookie)
             peer = self.find_peer(cookie)
             if not peer:
                 return False
@@ -167,6 +170,7 @@ def main():
     s = Server(port)
     s.create_and_bind_socket()
     s.main_loop()
+
 if __name__ == '__main__':
     main() 
 
