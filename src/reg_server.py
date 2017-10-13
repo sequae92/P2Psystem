@@ -119,7 +119,6 @@ class Server:
             
             if not peer_exists:
                 self.peerlist.append(peer)
-                print self.peerlist
             return True
         else:
             print cookie, self.find_peer(cookie)
