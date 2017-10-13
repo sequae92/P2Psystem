@@ -1,12 +1,15 @@
 import sys
 import thread
 from socket import *
+from datetime import *
 
 class Server:
     def __init__(self, port):
         self.port = port
         self.hostname = ""
         self.sock = None
+        self.peerlist = []
+        self.latest_cookie = 0
     
     def create_and_bind_socket(self):
         try:
@@ -60,7 +63,7 @@ class Server:
         # Extract cookie, hostname, RFC Server port and update records.
         hostname = msg.split()[1]
         cookie = msg.split()[2]
-        if cookie == None or cookie == "":
+        if cookie == None or cookie == "0":
             cookie = create_cookie()
         rfc_server_port = msg.split()[3]
         if self.update_records(True, hostname, cookie, rfc_server_port):
@@ -97,9 +100,37 @@ class Server:
     
     def update_records(self, isReg, hostname, cookie, rfc_server_port):
         # Use this method for "Register" and "Leave" messages.
-        # If isReg is True, this is a register request. Else, leave request.
+        if isReg:
+            # Check if peer is already present using cookie.
+            peer = find_peer(int(cookie))
+            if peer == None:
+                peer = Peer(hostname, cookie, rfc_server_port)
+            peer.ttl = 7200
+            peer.flag = True
+            peer.latest_register = datetime.now().strftime('%s')
+            peer.num_registers += 1
+
+    def find_peer(self, cookie):
+        for i in self.peerlist:
+            if i.cookie == cookie:
+                return i
+        return None
         
- 
+    def create_cookie(self):
+        self.latest_cookie += 1
+        return self.latest_cookie
+
+
+class Peer:
+    def __init__(self, hostname, cookie, rfc_server_port):
+        self.hostname = hostname
+        self.cookie = cookie
+        self.rfc_server_port = rfc_server_port
+        self.ttl = 0
+        self.flag = False
+        self.latest_register = 0
+        self.num_registers = 0
+
 
 def main():
     PORT_NUM = 65423
