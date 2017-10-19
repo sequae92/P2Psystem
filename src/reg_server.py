@@ -1,5 +1,6 @@
 import sys
 import thread
+from threading import Timer
 from socket import *
 from datetime import *
 
@@ -84,6 +85,7 @@ class Server:
             conn.send("Leave-OK")
         else:
             conn.send("Leave-Fail")
+        self.print_active_peers()
 
     def process_pquery(self, msg, conn):
         '''
@@ -94,24 +96,32 @@ class Server:
             conn.send("PQuery-Fail")
         peerlist = "PQuery-OK "
         for i in self.peerlist:
-            peerlist += str(i.hostname) + "," + str(i.rfc_server_port) + " "
+            if i.flag:
+                peerlist += str(i.hostname) + "," + str(i.rfc_server_port) + " "
         conn.send(peerlist.strip())
     
     def process_keepalive(self, msg, conn):
         '''
-            Message format: "Keepalive<sp>hostname<sp>cookie<sp>"
+            Message format: "Keepalive<sp>cookie"
         '''
         # What if a peer sends a keepalive after being inactive? Shouldn't it register first?
-        hostname = msg.split()[1]
-        cookie = int(msg.split()[2])
+        # For now, accept keepalives only from active peers. 
+        cookie = int(msg.split()[1])
         peer = self.find_peer(cookie)
+        print "Keepalive received"
         if not peer:
             conn.send("Keepalive-Fail")
         else:
-            peer.ttl = 7200
-            peer.flag = True    # Set flag to true irrespective of what it was.
-        
-        # ToDo: Manage timing of client.
+            if peer.timer is not None:
+                # Start timer for this peer if keepalive is received before expiration.
+                if peer.timer is not None:
+                    peer.timer.cancel()
+                peer.timer = Timer(72, self.update_timer, [cookie])
+                peer.timer.start()
+                peer.flag = True    # Set flag to true irrespective of what it was.
+                conn.send("Keepalive-OK")
+            else:
+                conn.send("Keepalive-Fail")
     
     def update_records(self, isReg, hostname, cookie, rfc_server_port):
         # Use this method for "Register" and "Leave" messages.
@@ -123,7 +133,13 @@ class Server:
                 peer = Peer(hostname, cookie, rfc_server_port)
             else:
                 peer_exists = True
-            peer.ttl = 7200
+            # Start a new timer for this peer.
+            if peer.timer is not None:
+                # In case a timer is already running, stop it.
+                if peer.time.is_alive():
+                    peer.timer.cancel()
+            peer.timer = Timer(72, self.update_timer, [cookie])
+            peer.timer.start()
             peer.flag = True
             peer.latest_register = datetime.now().strftime('%s')
             peer.num_registers += 1
@@ -132,6 +148,7 @@ class Server:
                 self.peerlist.append(peer)
             return True
         else:
+            # This is a leave message from the client
             peer = self.find_peer(cookie)
             if not peer:
                 return False
@@ -140,8 +157,23 @@ class Server:
                     # A peer that is inactive wants to leave. Return False.
                     return False
                 peer.flag = False
-                peer.ttl = 0
+                if peer.timer is not None:
+                    if peer.timer.is_alive():
+                        peer.timer.cancel()
+                peer.timer = None
                 return True
+
+    def update_timer(self, cookie):
+        # This method is called after a timer expires for a peer.
+        # Set the timer to None and flag the peer as inactive.
+        peer = self.find_peer(cookie)
+        if peer == None:
+            print "Peer with cookie {} does not exist.".format(cookie) 
+        else:
+            peer.timer = None
+            peer.flag = False
+            print "Timer expired for cookie:", cookie
+        self.print_active_peers()
 
     def find_peer(self, cookie):
         for i in self.peerlist:
@@ -153,13 +185,17 @@ class Server:
         self.latest_cookie += 1
         return self.latest_cookie
 
+    def print_active_peers(self):
+        for i in self.peerlist:
+            if i.flag:
+                print "hostname:", i.hostname, "\trfc_server_port:", i.rfc_server_port, "\tcookie:", i.cookie
 
 class Peer:
     def __init__(self, hostname, cookie, rfc_server_port):
         self.hostname = hostname
         self.cookie = cookie
         self.rfc_server_port = rfc_server_port
-        self.ttl = 0
+        self.timer = None
         self.flag = False
         self.latest_register = 0
         self.num_registers = 0
