@@ -1,13 +1,17 @@
 # This script file describes the client side functioning of a P2P system
 
+# Client class:
 # Implement the 4 functions to the RS.
 # Implement getRFCIndex and downloadRFC.
 # Keep the cookie in a file so that it can be used across runs.
-# Share the RFC index list with the server.
 
+# Server class:
+# Use the RFC Index from the client using a global list.
+# Implement sendRFCIndex and sendRFC functions.
+# For each element in the RFC Index list, extract values and send a comma separated line for each element.
 
-
-
+# Index class:
+# RFC Number, RFC Title, Hostname of the peer that has the RFC, TTL.
 
 import sys
 from datetime import *
