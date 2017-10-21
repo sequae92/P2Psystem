@@ -1,12 +1,11 @@
-    #This script file describes the client side functioning of a P2P system
-    #client.py
+#This script file describes the client side functioning of a P2P system
+#client.py
 
-    import sys
-    from datetime import *
-    from socket import *
-    from datetime import *
+import sys
+from datetime import *
+from socket import *
 
-    class Client:
+class Client:
 
     #initialize all instance variables
     def __init__(self,port,hostname,cookie,flag1,flag2):
@@ -58,17 +57,16 @@
         hostname = socket.gethostname()
         s.connect((hostname,rfc_server_port))
 
-        if()
         msg = "Register<sp>"+hostname+"<sp>" + cookie + "<sp>" + rfc_server_port
         s.sendall(msg)
         print("Register Message sent to the RS Server")
 
     def client_pquery():
-            '''
+	'''
                 Message format: "PQuery<sp>hostname<sp>cookie<sp>rfc_server_port"
-            '''
-        rfc_server_port = 65450
-        s= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+	'''
+	rfc_server_port = 65450
+	s= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         hostname = socket.gethostname()
         s.connect((hostname,rfc_server_port))
         msg = "PQuery<sp>"+hostname+"<sp>" + cookie + "<sp>" + rfc_server_port
@@ -108,9 +106,9 @@
             c.start_conn()
             c.create_RFC_server()
             c.client_register()
-            c.client_pquery()
-            c.client_keepalive()
-            c.client_leave()
+            #c.client_pquery()
+            #c.client_keepalive()
+            #c.client_leave()
 
 
     if '__init__' == '__main__':

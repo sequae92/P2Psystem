@@ -1,5 +1,5 @@
 import sys
-import _thread as thread
+import thread
 from threading import Timer
 from socket import *
 from datetime import *
