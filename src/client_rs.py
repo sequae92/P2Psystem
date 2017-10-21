@@ -13,23 +13,30 @@ class Client:
         self.cookie = cookie
         self.rfc_server_port = rfc_server_port
         self.flag1 = 0
-        self.flag2 = 0   	
+        self.flag2 = 0
+	self.isReg = False;   	
             
     #start the socket connection
     def start_conn(self):
-            s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-            hostname = ''
-            print("Hostname and port ",self.hostname," Port: ",self.port)
-            s.connect((self.hostname,self.port))
-            print("Connection to RS is successful")
+	s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+	hostname = ''
+	print("Hostname and port ",self.hostname," Port: ",self.port)
+	s.connect((self.hostname,self.port))
+	print("Connection to RS is successful")
 
     #send and receive data after connection is setup
     def send_receive(self,conn):
-        #s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    	#s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 	#conn.connect((self.hostname,self.port))
 	#s.sendall("Hello,Server")
         data = conn.recv(1024)
-        print("Received data from the RS: ",str((data.split())[1]))
+        if self.isReg:
+            self.cookie = str((data.split())[1])
+        print("Received data from the RS: ",str(data))
+    
+    def create_cookie_file(self):
+    	with open('cookie.txt','w') as fileptr:
+            fileptr.write(self.cookie)
 
     def create_RFC_server(self):
         HOST = ''
@@ -62,19 +69,22 @@ class Client:
         msg = "Register abcde " + str(self.cookie) + " " + str(self.rfc_server_port)
         s.sendall(msg)
         print("Register Message sent to the RS Server")
+        self.isReg = True
 	self.send_receive(s)
+        self.create_cookie_file()
 
     def client_pquery(self):
 	'''
                 Message format: "PQuery<sp>hostname<sp>cookie"
 	'''
-	s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        #hostname = socket.gethostname()
-        s.connect((self.hostname,self.port))
-        msg = "PQuery "+str(self.hostname)+" " + str(self.cookie)
-        s.sendall(msg)
-        print("PQuery message sent to the RS Server")
-
+	if isReg:
+		s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        	#hostname = socket.gethostname()
+        	s.connect((self.hostname,self.port))
+		msg = "PQuery "+str(self.hostname)+" " + str(self.cookie)
+		s.sendall(msg)
+		print("PQuery message sent to the RS Server")
+		self.send_receive(s)
 
     def client_keepalive(self):
         '''
