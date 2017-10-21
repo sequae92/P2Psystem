@@ -16,23 +16,23 @@ class Server:
         try:
             self.sock = socket(AF_INET, SOCK_STREAM)
         except: # Change this line.
-            print("Socket could not be created") # log instead.
+            print "Socket could not be created" # log instead.
             sys.exit(1)
         if self.sock is not None:
             try:
                 self.sock.bind((self.hostname, self.port))
             except Exception as e:
-                print(e.message)
-                print("Could not bind socket to port! Exiting")
+                print e.message
+                print "Could not bind socket to port! Exiting"
                 self.shutdown_and_close()
                 sys.exit(1)
 
     def shutdown_and_close(self):
         try:
             self.sock.shutdown(socket.SHUT_RDWR)
-            print("Socket shutdown successfully.")
+            print "Socket shutdown successfully."
         except Exception as e:
-            print(e.message, " Couldn't shutdown the socket on the server.")
+            print e.message, " Couldn't shutdown the socket on the server."
         try:
             self.sock.close()
         except Exception as e:
