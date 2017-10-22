@@ -143,10 +143,11 @@ class Server:
         else:
             peer_exists = True
         # Start a new timer for this peer.
-        if peer.timer is not None:
-            # In case a timer is already running, stop it.
-            if peer.timer.is_alive():
-                peer.timer.cancel()
+        if peer.timer is not None and peer.timer.is_alive():
+            # If the timer is running, it means the client is already registered.
+            # Subsequent register messages when the client is active are ignored.
+            # The client must send keepalives instead.
+            return False
         peer.timer = Timer(72, self.update_timer, [cookie])
         peer.timer.start()
         peer.flag = True
