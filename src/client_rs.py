@@ -56,9 +56,12 @@ class Client:
         msg = "Register " + str(self.hostname) + " " + str(self.cookie) + " " + str(self.rfc_server_port)
         recv_data = self.send_msg_and_receive(msg, sock) # Format: Register-OK<sp>cookie
         if recv_data:
-            self.cookie = recv_data.split()[1]
-            print("Register Message sent to the RS Server")
-            self.create_cookie_file()
+            if recv_data.endswith("OK"):
+                self.cookie = recv_data.split()[1]
+                print "Register Message sent to the RS."
+                self.create_cookie_file()
+            else:
+                print "Register response from RS: Fail."
 
         
     def pquery(self):
