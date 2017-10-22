@@ -52,7 +52,7 @@ class Client:
             Message format: "Register<sp>hostname<sp>cookie<sp>rfc_server_port"
         '''
         sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
-        msg = "Register", self.hostname, self.cookie, self.rfc_server_port
+        msg = "Register " + str(self.hostname) + " " + str( self.cookie) + " " + str(self.rfc_server_port)
         recv_data = self.send_msg_and_receive(msg, sock) # Format: Register-OK<sp>cookie
         if recv_data:
             self.cookie = recv_data.split()[1]
@@ -65,7 +65,7 @@ class Client:
                 Message format: "PQuery<sp>cookie"
         '''
         sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
-        msg = "PQuery", self.cookie
+        msg = "PQuery" + str(self.cookie)
         recv_data = self.send_msg_and_receive(msg, sock)
         #print("PQuery message sent to the RS Server")
         if recv_data:
@@ -84,7 +84,7 @@ class Client:
                 Message format: "Keepalive<sp>cookie"
         '''
         sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
-        msg = "Keepalive", self.cookie
+        msg = "Keepalive " + str(self.cookie)
         recv_data = self.send_msg_and_receive(msg, sock)
         if recv_data: 
             if recv_data.endswith("OK"):
@@ -99,7 +99,7 @@ class Client:
                 Message format: "Leave<sp>cookie"
         '''
         sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
-        msg = "Leave", self.cookie
+        msg = "Leave " + str(self.cookie)
         recv_data = self.send_msg_and_receive(msg, sock)
         if recv_data:
             if recv_data.endswith("OK"):
@@ -135,7 +135,7 @@ class Index:
 
 def main():
     rs_port = 65423
-    hostname = '152.46.20.81'
+    hostname = '152.46.17.147'
     cookie = 1
     rfc_server_port = 65750
  
