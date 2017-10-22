@@ -52,7 +52,7 @@ class Client:
             Message format: "Register<sp>hostname<sp>cookie<sp>rfc_server_port"
         '''
         sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
-        msg = "Register " + self.hostname + " " + self.cookie + " " + self.rfc_server_port
+        msg = "Register", self.hostname, self.cookie, self.rfc_server_port
         recv_data = self.send_msg_and_receive(msg, sock) # Format: Register-OK<sp>cookie
         if recv_data:
             self.cookie = recv_data.split()[1]
@@ -65,7 +65,7 @@ class Client:
                 Message format: "PQuery<sp>cookie"
         '''
         sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
-        msg = "PQuery " + self.cookie
+        msg = "PQuery", self.cookie
         recv_data = self.send_msg_and_receive(msg, sock)
         #print("PQuery message sent to the RS Server")
         if recv_data:
@@ -84,7 +84,7 @@ class Client:
                 Message format: "Keepalive<sp>cookie"
         '''
         sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
-        msg = "Keepalive " + str(self.cookie)
+        msg = "Keepalive", self.cookie
         recv_data = self.send_msg_and_receive(msg, sock)
         if recv_data: 
             if recv_data.endswith("OK"):
@@ -99,7 +99,7 @@ class Client:
                 Message format: "Leave<sp>cookie"
         '''
         sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
-        msg = "Leave " + self.cookie
+        msg = "Leave", self.cookie
         recv_data = self.send_msg_and_receive(msg, sock)
         if recv_data:
             if recv_data.endswith("OK"):
@@ -114,9 +114,12 @@ class Client:
         msg = "RFCQuery"
         recv_data = self.send_msg_and_receive(msg, sock)
         if recv_data:
-            
-        else:'''
-        
+            if recv_data.split('\n')[0].endswith("OK"):
+                lines = recv_data.split('\n')[1:]
+                for index in lines:
+                    
+        else:
+       ''' 
 
 class Peer:
     def __init__(self, hostname, rfc_server_port):
