@@ -47,8 +47,6 @@ class Server:
         
     def process_request(self, conn):
         msg = conn.recv(4096)
-	l = msg.split()
-	print(l,l[0])
         if msg.split()[0] == "Register":
             self.process_reg(msg, conn)
         elif msg.split()[0] == "Leave":
@@ -74,7 +72,7 @@ class Server:
             reg_reply = "Register-OK " + str(cookie)
             conn.send(reg_reply)
         else:
-            pass # ToDo: Better error message back to the client.
+            conn.send("Register-Fail")
 
     def process_leave(self, msg, conn):
         '''
@@ -137,7 +135,7 @@ class Server:
         # Start a new timer for this peer.
         if peer.timer is not None:
             # In case a timer is already running, stop it.
-            if peer.time.is_alive():
+            if peer.timer.is_alive():
                 peer.timer.cancel()
         peer.timer = Timer(72, self.update_timer, [cookie])
         peer.timer.start()

@@ -52,7 +52,7 @@ class Client:
             Message format: "Register<sp>hostname<sp>cookie<sp>rfc_server_port"
         '''
         sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
-        msg = "Register " + str(self.hostname) + " " + str( self.cookie) + " " + str(self.rfc_server_port)
+        msg = "Register " + str(self.hostname) + " " + str(self.cookie) + " " + str(self.rfc_server_port)
         recv_data = self.send_msg_and_receive(msg, sock) # Format: Register-OK<sp>cookie
         if recv_data:
             self.cookie = recv_data.split()[1]
