@@ -105,7 +105,7 @@ class Server:
             if peer.flag:
                 peerlist += peer.hostname + " " + str(peer.rfc_server_port) + "\n"
         conn.send(peerlist.strip())
-        print "Client with cookie {} PQuery Processed.".format(self.cookie)
+        print "Client with cookie {} PQuery Processed.".format(cookie)
 
     def process_keepalive(self, msg, conn):
         '''
