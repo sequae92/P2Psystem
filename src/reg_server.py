@@ -71,8 +71,10 @@ class Server:
         if self.update_records_reg(hostname, cookie, rfc_server_port):
             reg_reply = "Register-OK " + str(cookie)
             conn.send(reg_reply)
+            print "Client with cookie {} is Registered.".format(cookie)
         else:
             conn.send("Register-Fail")
+            print "Client failed to Register"
 
     def process_leave(self, msg, conn):
         '''
@@ -83,8 +85,11 @@ class Server:
         rfc_server_port = msg.split()[3]
         if self.update_records_leave(cookie):
             conn.send("Leave-OK")
+            print "Client with cookie {} Leave Processed.".format(self.cookie)
+             
         else:
             conn.send("Leave-Fail")
+            print "Leave Message failed to process!"
         self.print_active_peers()
 
     def process_pquery(self, msg, conn):
@@ -94,12 +99,14 @@ class Server:
         cookie = int(msg.split()[1])
         if not self.find_peer(cookie):
             conn.send("PQuery-Fail")
+            print "PQuery message failed to process!"
         peerlist = "PQuery-OK\n"
         for peer in self.peerlist:
             if peer.flag:
                 peerlist += peer.hostname + " " + str(peer.rfc_server_port) + "\n"
         conn.send(peerlist.strip())
-    
+        print "Client with cookie {} PQuery Processed.".format(self.cookie)
+
     def process_keepalive(self, msg, conn):
         '''
             Message format: "Keepalive<sp>cookie"
@@ -111,6 +118,7 @@ class Server:
         print "Keepalive received"
         if not peer:
             conn.send("Keepalive-Fail")
+            print "KeepAlive Message failed to process!"
         else:
             if peer.timer is not None:
                 # Start timer for this peer if keepalive is received before expiration.
@@ -120,8 +128,10 @@ class Server:
                 peer.timer.start()
                 peer.flag = True    # Set flag to true irrespective of what it was.
                 conn.send("Keepalive-OK")
+                print "KeepAlive message is successfully processed"
             else:
                 conn.send("Keepalive-Fail")
+                print "KeepAlive Message failed to process!"
     
     def update_records_reg(self, hostname, cookie, rfc_server_port):
         # Use this method for "Register" messages.

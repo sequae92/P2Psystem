@@ -56,7 +56,7 @@ class Client:
         recv_data = self.send_msg_and_receive(msg, sock) # Format: Register-OK<sp>cookie
         if recv_data:
             self.cookie = recv_data.split()[1]
-            #print("Register Message sent to the RS Server")
+            print("Register Message sent to the RS Server")
             self.create_cookie_file()
 
         
