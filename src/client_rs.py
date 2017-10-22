@@ -44,8 +44,9 @@ class Client:
         return data
 
     def create_cookie_file(self):
-        with open("cookie.txt", "w") as fileptr:
-            fileptr.write(self.cookie)
+        if not os.path.exists("cookie.txt"):
+            with open("cookie.txt", "w") as fileptr:
+                fileptr.write(self.cookie)
 
     def register(self):
         '''
