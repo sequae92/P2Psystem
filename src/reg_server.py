@@ -70,7 +70,7 @@ class Server:
         if cookie == 0:
             cookie = self.create_cookie()
         rfc_server_port = msg.split()[3]
-        if self.update_records(True, hostname, cookie, rfc_server_port):
+        if self.update_records_reg(hostname, cookie, rfc_server_port):
             reg_reply = "Register-OK " + str(cookie)
             conn.send(reg_reply)
         else:
@@ -83,7 +83,7 @@ class Server:
         hostname = msg.split()[1]
         cookie = int(msg.split()[2])
         rfc_server_port = msg.split()[3]
-        if self.update_records(False, hostname, cookie, rfc_server_port):
+        if self.update_records_leave(cookie):
             conn.send("Leave-OK")
         else:
             conn.send("Leave-Fail")
@@ -96,10 +96,10 @@ class Server:
         cookie = int(msg.split()[1])
         if not self.find_peer(cookie):
             conn.send("PQuery-Fail")
-        peerlist = "PQuery-OK "
-        for i in self.peerlist:
-            if i.flag:
-                peerlist += str(i.hostname) + "," + str(i.rfc_server_port) + " "
+        peerlist = "PQuery-OK\n"
+        for peer in self.peerlist:
+            if peer.flag:
+                peerlist += peer.hostname + " " + str(peer.rfc_server_port) + "\n"
         conn.send(peerlist.strip())
     
     def process_keepalive(self, msg, conn):
@@ -125,31 +125,30 @@ class Server:
             else:
                 conn.send("Keepalive-Fail")
     
-    def update_records(self, isReg, hostname, cookie, rfc_server_port):
-        # Use this method for "Register" and "Leave" messages.
-        if isReg:
-            # Check if peer is already present using cookie.
-            peer = self.find_peer(cookie)
-            if not peer:
-                peer_exists = False
-                peer = Peer(hostname, cookie, rfc_server_port)
-            else:
-                peer_exists = True
-            # Start a new timer for this peer.
-            if peer.timer is not None:
-                # In case a timer is already running, stop it.
-                if peer.time.is_alive():
-                    peer.timer.cancel()
-            peer.timer = Timer(72, self.update_timer, [cookie])
-            peer.timer.start()
-            peer.flag = True
-            peer.latest_register = datetime.now().strftime('%s')
-            peer.num_registers += 1
-            
-            if not peer_exists:
-                self.peerlist.append(peer)
-            return True
+    def update_records_reg(self, hostname, cookie, rfc_server_port):
+        # Use this method for "Register" messages.
+        # Check if peer is already present using cookie.
+        peer = self.find_peer(cookie)
+        if not peer:
+            peer_exists = False
+            peer = Peer(hostname, cookie, rfc_server_port)
         else:
+            peer_exists = True
+        # Start a new timer for this peer.
+        if peer.timer is not None:
+            # In case a timer is already running, stop it.
+            if peer.time.is_alive():
+                peer.timer.cancel()
+        peer.timer = Timer(72, self.update_timer, [cookie])
+        peer.timer.start()
+        peer.flag = True
+        peer.latest_register = datetime.now().strftime('%s')
+        peer.num_registers += 1
+        if not peer_exists:
+            self.peerlist.append(peer)
+        return True
+        
+        def update_records_leave(self, cookie):
             # This is a leave message from the client
             peer = self.find_peer(cookie)
             if not peer:

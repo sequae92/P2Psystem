@@ -1,122 +1,125 @@
 #This script file describes the client side functioning of a P2P system
-#client.py
+
+# This client must support 4 functions to the RS.
+# Create a socket, shutdown and close a socket.
+# Also, implement 2 peer functions.
+# Maintain a peerlist and an indexlist as class variables that the server can access.
+# Cookie goes into a file.
 
 import sys
-from datetime import *
 import socket
 
 class Client:
-    #initialize all instance variables
-    def __init__(self,port,hostname,cookie,rfc_server_port):
-        self.port = port # this is rs server port
-        self.hostname = hostname # this is in rs server hostname
-        self.cookie = cookie
+    indexlist = []
+    def __init__(self, rs_hostname, rs_port, rfc_server_port):
+        self.hostname = socket.gethostname()
+        self.rs_port = rs_port
+        self.rs_hostname = rs_hostname
         self.rfc_server_port = rfc_server_port
-        self.flag1 = 0
-        self.flag2 = 0
-	self.isReg = False;   	
+        self.active_peers = []
+        if os.path.exists("cookie.txt"):
+            with open("cookie.txt") as f:
+                self.cookie = f.read().strip()
+        else:
+            self.cookie = 0
             
     #start the socket connection
-    def start_conn(self):
-	s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-	hostname = ''
-	print("Hostname and port ",self.hostname," Port: ",self.port)
-	s.connect((self.hostname,self.port))
-	print("Connection to RS is successful")
-
-    #send and receive data after connection is setup
-    def send_receive(self,conn):
-    	#s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-	#conn.connect((self.hostname,self.port))
-	#s.sendall("Hello,Server")
-        data = conn.recv(1024)
-        if self.isReg:
-            self.cookie = str((data.split())[1])
-        print("Received data from the RS: ",str(data))
+    def create_socket_and_connect(self, dest_hostname, dest_port):
+	    try:
+            sock = socket.socket(AF_INET, SOCK_STREAM)
+        except socket.error, e:
+            print "Socket could not be created"
+            sys.exit(1) 
+	    sock.connect((self.dest_hostname, dest_port))
+	    return sock
     
+    def send_msg(self, msg, sock):
+        sock.sendall(msg)
+        try:
+            data = sock.recv(8192)
+        except socket.error:
+            print "Data receive failed."
+            data = None
+        return data
+
     def create_cookie_file(self):
-    	with open('cookie.txt','w') as fileptr:
+        with open("cookie.txt", "w") as fileptr:
             fileptr.write(self.cookie)
 
-    def create_RFC_server(self):
-        HOST = ''
-        RFC_SERVER_PORT = 65450 # hardcoded for all RFC_Server ports on all peers, will keep another standby port
-        s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        #Bind socket to host port
-
-        try:
-            s.bind((HOST,RFC_SERVER_PORT))
-        except socket.error as msg:
-            print('Bind failed. Error code:' + str(msg[0]) + ' Message ' + msg[1])
-            sys.exit()
-        print('Socket Bind complete')
-
-        s.listen(10)
-        #Now keep waiting for connection from the client
-        while 1:
-            conn,addr = s.accept()
-            print('Connected with ' + addr[0] + ':' + str(addr[1]))
-        s.close()
-
-    def client_register(self):
+    def register(self):
         '''
-                Message format: "Register<sp>hostname<sp>cookie<sp>rfc_server_port"
-            '''
-        s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        #hostname = socket.gethostname()
-        s.connect((self.hostname,self.port))
-
-        msg = "Register abcde " + str(self.cookie) + " " + str(self.rfc_server_port)
-        s.sendall(msg)
-        print("Register Message sent to the RS Server")
-        self.isReg = True
-	self.send_receive(s)
-        self.create_cookie_file()
-
-    def client_pquery(self):
-	'''
-                Message format: "PQuery<sp>hostname<sp>cookie"
-	'''
-	if isReg:
-		s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        	#hostname = socket.gethostname()
-        	s.connect((self.hostname,self.port))
-		msg = "PQuery "+str(self.hostname)+" " + str(self.cookie)
-		s.sendall(msg)
-		print("PQuery message sent to the RS Server")
-		self.send_receive(s)
-
-    def client_keepalive(self):
+            Message format: "Register<sp>hostname<sp>cookie<sp>rfc_server_port"
         '''
-                Message format: "Keepalive<sp>hostname<sp>cookie"
-            '''
-        s= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        #hostname = socket.gethostname()
-        s.connect((self.hostname,self.port))
-        msg = "Keepalive "+str(self.hostname)+" " + str(self.cookie)
-        s.sendall(msg)
-        print("KeepAlive message sent to the RS Server")
+        sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
+        msg = "Register " + self.hostname + " " + self.cookie + " " + self.rfc_server_port
+        recv_data = self.send_msg(msg, sock) # Format: Register-OK<sp>cookie
+        if recv_data:
+            self.cookie = recv_data.split()[1]
+            #print("Register Message sent to the RS Server")
+            self.create_cookie_file()
 
+        
+    def pquery(self):
+	    '''
+                Message format: "PQuery<sp>cookie"
+	    '''
+        sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
+		msg = "PQuery " + self.cookie
+		recv_data = self.send_msg(msg, sock)
+		#print("PQuery message sent to the RS Server")
+        if recv_data:
+            if recv_data.split('\n')[0].endswith("Fail"):
+                print "PQuery response from RS: Fail"
+            else:
+                # The Registration Server has sent a list of active peers, add them to peerlist.
+                for line in recv_data.split('\n')[1:]:  # First line will have the line PQuery-OK
+                    peer = Peer(line.split()[0], line.split()[1]) # Hostname and RFC Server port
+                    self.active_peers.append(peer)
+        else:
+            print "PQuery: Receiver did not send any data back." 
 
-    def client_leave(self):
+    def keepalive(self):
         '''
-                Message format: "Leave<sp>hostname<sp>cookie<sp>rfc_server_port"
-            '''
-        s= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        #hostname = socket.gethostname()
-        s.connect((self.hostname,self.port))
-        msg = "Leave "+str(self.hostname)+" " + str(self.cookie) + " " + str(self.rfc_server_port)
-        s.sendall(msg)
-        print("Leave message sent to the RS Server")
+                Message format: "Keepalive<sp>cookie"
+        '''
+        sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
+        msg = "Keepalive " + str(self.cookie)
+		recv_data = self.send_msg(msg, sock)
+        if recv_data 
+            if recv_data.endswith("OK"):
+                print "Keepalive successfully processed by the RS."
+            else:
+                print "Keepalive response from RS: Fail".
+        else:
+            print "PQuery: Receiver did not send any data back." 
 
+    def leave(self):
+        '''
+                Message format: "Leave<sp>cookie"
+        '''
+        sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
+        msg = "Leave " + self.cookie
+		recv_data = self.send_msg(msg, sock)
+        if recv_data:
+            if recv_data.endswith("OK"):
+                print "Leave successfully processed by the RS."
+            else:
+                print "Leave response from RS: Fail."
+        else:
+            print "Leave: Receiver did not send any data back."
+
+class Peer:
+    def __init__(self, hostname, rfc_server_port):
+        self.hostname = hostname
+        self.rfc_server_port = port
 
 def main():
-    port = 65423
+    rs_port = 65423
     hostname = '152.46.20.81'
     cookie = 1
     rfc_server_port = 65750
  
-    c = Client(port,hostname,cookie,rfc_server_port) # instantiate with server port and hostname
+    c = Client(rs_port,hostname,cookie,rfc_server_port) # instantiate with server port and hostname
     #rfc_peer = Server_Peer(port,hostname) # importing Server_Peer class
 
     #c.start_conn()
@@ -129,4 +132,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main();
+    main()
