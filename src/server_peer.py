@@ -72,10 +72,10 @@ class Server_Peer:
         '''
         # Search for the RFC in the rfc directory and read the file and send it.
         rfc_num = msg.split()[1]
-        fname = "../{}".format(rfc_num)
+        fname = "../rfc/{}.txt".format(rfc_num)
         if os.path.exists(fname):
             with open(fname) as f:
-                to_send = "RFC {}\n".format(rfc_num)
+                to_send = "GetRFC-OK\n"
                 to_send += f.read()
                 conn.send(to_send)
         else:

@@ -82,6 +82,8 @@ class Client:
                 self.create_cookie_file()
             else:
                 print "Register response from RS: Fail."
+        else:
+            print "Register: Receiver did not send any data back."
 
         
     def pquery(self):
@@ -159,8 +161,42 @@ class Client:
                 print "PQuery response from peer with hostname {}: Fail.".format(peer_hostname)
         else:
             print "PQuery: Receiver with hostname {} did not send any data back.".format(peer_hostname)
-                    
-    def update_index_timer(rfc_num, rfc_hostname):
+                   
+    def getRFC(self, rfc_num):
+        rfc_received = False
+        for i in Client.indexlist:
+            # For each element, check if the element has the required RFC if it is not received already.
+            if i.rfc_num == rfc_num and not rfc_received:
+                ret = self.send_rfc_req(rfc_num, i.peer_hostname)
+                if ret[0] == True:  # Ignore if not True.
+                    rfc_received = True
+                    with open("../rfc/{}.txt".format(rfc_num), "w") as f:
+                        print "Writing RFC data to rfc/{}.txt.".format(rfc_num)
+                        f.write(ret[1])
+            # else pass
+        
+    def send_rfc_req(self, rfc_num, peer_hostname):
+        # Find the port number of the peer with peer_hostname from peerlist.
+        # Send a req to the peer, get the response. If Fail, return false. If OK, return true and the data. 
+        for i in self.peerlist:
+            if i.hostname == peer_hostname:
+                sock = self.create_socket_and_connect(peer_hostname, i.rfc_server_port)
+                recv_data = self.send_msg_and_receive(msg, sock)
+                if recv_data:
+                    if recv_data.split('\n').endswith("OK"):
+                        # First line indicates the status, which is OK. Data is second line onwards.
+                        return [True, '\n'.join(recv_data.split('\n')[1:])]
+                    else:
+                        # Status is fail.
+                        print "RFC Response from peer with hostname {}: Fail.".format(peer_hostname)
+                        return [False, None]
+                else:
+                    print "RFC Response: Receiver with hostname {} did not send back any data.".format(peer_hostname)
+                    return [False, None]
+        print "Peer with hostname {} does not exist in the peerlist.".format(peer_hostname)
+        return [False, None]
+                
+    def update_index_timer(self, rfc_num, rfc_hostname):
         index = find_index(rfc_num, rfc_hostname)
         if index == None:
             print "Index for hostname {0} and RFC number {1} does not exist.".format(rfc_hostname, rfc_num)
