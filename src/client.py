@@ -162,12 +162,13 @@ class Client:
         else:
             print "PQuery: Receiver with hostname {} did not send any data back.".format(peer_hostname)
                    
-    def getRFC(self, rfc_num):
+    def getrfc(self, rfc_num):
         rfc_received = False
+        msg = "GetRFC {}".format(rfc_num)
         for i in Client.indexlist:
             # For each element, check if the element has the required RFC if it is not received already.
             if i.rfc_num == rfc_num and not rfc_received:
-                ret = self.send_rfc_req(rfc_num, i.peer_hostname)
+                ret = self.send_rfc_req(msg, i.peer_hostname)
                 if ret[0] == True:  # Ignore if not True.
                     rfc_received = True
                     with open("../rfc/{}.txt".format(rfc_num), "w") as f:
@@ -175,7 +176,7 @@ class Client:
                         f.write(ret[1])
             # else pass
         
-    def send_rfc_req(self, rfc_num, peer_hostname):
+    def send_rfc_req(self, msg, peer_hostname):
         # Find the port number of the peer with peer_hostname from peerlist.
         # Send a req to the peer, get the response. If Fail, return false. If OK, return true and the data. 
         for i in self.peerlist:
