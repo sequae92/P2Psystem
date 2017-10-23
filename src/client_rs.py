@@ -9,6 +9,7 @@
 import os
 import sys
 from socket import *
+from threading import Timer
 
 class Client:
     indexlist = []
@@ -23,8 +24,27 @@ class Client:
                 self.cookie = f.read().strip()
         else:
             self.cookie = 0
-            
-    #start the socket connection
+        self.build_index_list()
+
+    def build_index_list(self):
+        rfcfiles = os.listdir("../rfc")
+        # 8266.txt: Format of the RFC text files in the rfc directory.
+        # Assuming only such files exist in the rfc directory.
+        # Get only the RFC number, for each RFC file.
+        map(lambda x:x[:-4], rfcfiles) 
+        
+        for i in rfcfiles:
+            rfc_title = self.get_rfc_title_by_num(i)
+            this_hostname = gethostname()
+            index = Index(i, rfc_title, this_hostname)
+            # Create a timer object but don't start it.
+            # This index is based on local RFCs so it should not be removed from indexlist.
+            index.timer = Timer(72, self.update_index_timer, [i, this_hostname])
+            Client.indexlist.append(index)
+    
+    def get_rfc_title_by_num(self, num):
+        return "TITLE" # How do we implement this?    
+    
     def create_socket_and_connect(self, dest_hostname, dest_port):
         try:
             sock = socket(AF_INET, SOCK_STREAM)
@@ -113,17 +133,53 @@ class Client:
         else:
             print "Leave: Receiver did not send any data back."
             
-    '''def rfcquery(self, peer_hostname, peer_rfc_server_port):
+    def rfcquery(self, peer_hostname, peer_rfc_server_port):
         sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
         msg = "RFCQuery"
         recv_data = self.send_msg_and_receive(msg, sock)
         if recv_data:
             if recv_data.split('\n')[0].endswith("OK"):
                 lines = recv_data.split('\n')[1:]
-                for index in lines:
+                for line in lines:
+                    # Each line is an index.
+                    rfc_num =line.split()[0]
+                    rfc_hostname = line.split()[1]
+                    rfc_title = line.split()[2:]    # Title may have spaces, put it at the end.
+                    if find_index(rfc_num, rfc_hostname) is None:
+                        # If this index doesn't exist, create an Index object and append to indexlist.
+                        index = Index(rfc_num, rfc_hostname, rfc_title)
+                        index.timer = Timer(72, self.update_index_timer, [rfc_num, rfc_hostname])
+                        # Start a timer as this is potentially information about a remotely present RFC.
+                        index.timer.start()
+                        # Merge the new entry with the local indexlist.
+                        Client.indexlist.append(index)
+                    # else: Refresh the timer if the same index has been received by somebody else?
                     
+            else:
+                print "PQuery response from peer with hostname {}: Fail.".format(peer_hostname)
         else:
-       ''' 
+            print "PQuery: Receiver with hostname {} did not send any data back.".format(peer_hostname)
+                    
+    def update_index_timer(rfc_num, rfc_hostname):
+        index = find_index(rfc_num, rfc_hostname)
+        if index == None:
+            print "Index for hostname {0} and RFC number {1} does not exist.".format(rfc_hostname, rfc_num)
+        else:
+            # Check if it is a local index or an index shared by somebody else.
+            # A local index will never have a timer that is running.
+            if index.timer.is_alive():
+                index.timer.cancel()
+                indexlist.remove(index)
+                print "Timer expired for index with hostname {0} and RFC number {1}:".format(rfc_hostname, rfc_num)
+            else:
+                print "Error: Local index expired for hostname {0} and RFC number {1}".format(rfc_hostname, rfc_num)
+
+    def find_index(self, rfc_num, rfc_hostname):
+        for i in indexlist:
+            if i.rfc_num == rfc_num and i.rfc_hostname == rfc_hostname:
+                return i
+        return None
+        
 
 class Peer:
     def __init__(self, hostname, rfc_server_port):
