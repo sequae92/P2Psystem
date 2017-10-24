@@ -3,11 +3,11 @@
 import server_peer as sp
 import client
 
-hostname = '152.1.13.172'
+rs_hostname = '10.0.0.1'
 rs_port = 65423
 rfc_server_port = 60002
 
-c = client.Client(hostname,rs_port,rfc_server_port)
+c = client.Client(rs_hostname,rs_port,rfc_server_port)
 c.register()
 '''
 c.pquery()

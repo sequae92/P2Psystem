@@ -97,7 +97,7 @@ class Server_Peer:
         except Exception as e:
             print e.message, "Couldn't close the socket"
     
-    def process_request(conn):
+    def process_request(self, conn):
         msg = conn.recv(4096)
         if msg == "RFCQuery":
             self.process_rfc_query(msg, conn)
@@ -153,7 +153,7 @@ class Index:
    
  
 def main():
-    port = 64423 # Add a port of the peer
+    port = 60002 # Add a port of the peer
     s = Server_Peer(port)
     s.create_and_bind_socket()
     s.main_loop()
