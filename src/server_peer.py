@@ -54,11 +54,11 @@ class Server_Peer:
         return "TITLE" # How do we implement this?  
 
     @staticmethod
-    def get_indexlist(self):
+    def get_indexlist():
         return Server_Peer.indexlist
 
     @staticmethod
-    def append_indexlist(self, recv_data):
+    def append_indexlist(recv_data):
         # Assuming the client sends valid data here and handles error conditions.
         for line in lines:
             # Each line is an index.
