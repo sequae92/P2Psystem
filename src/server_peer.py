@@ -3,7 +3,7 @@ import thread
 from threading import Timer
 from socket import *
 from datetime import *
-import client_peer
+import client
 
 class Server_Peer:
     def __init__(self, port):
@@ -58,8 +58,8 @@ class Server_Peer:
         # Look through the indexlist maintained by the client and send the currently active entries.
         # Extract information from the Index objects and add to a string and send back.
         rfc_index_l = []
-        if client_peer.indexlist:
-            for i in client_peer.indexlist:
+        if client.Client.indexlist:
+            for i in client.Client.indexlist:
                 if i.timer.is_alive():
                 index_str = "{0}, {1}, {2}".format(i.rfc_num, i.peer_hostname, i.rfc_title)
                 rfc_index_l.append(index_str)
