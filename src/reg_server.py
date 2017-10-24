@@ -97,6 +97,7 @@ class Server:
             Message format: "PQuery<sp>cookie"
         '''
         cookie = int(msg.split()[1])
+        #print "Cookie:",cookie
         if not self.find_peer(cookie):
             conn.send("PQuery-Fail")
             print "PQuery message failed to process!"

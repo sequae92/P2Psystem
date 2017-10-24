@@ -56,6 +56,7 @@ class Client:
     
     def send_msg_and_receive(self, msg, sock):
         sock.sendall(msg)
+        print " Sendall Done"
         try:
             data = sock.recv(8192)
         except error:
@@ -76,9 +77,10 @@ class Client:
         msg = "Register " + str(self.hostname) + " " + str(self.cookie) + " " + str(self.rfc_server_port)
         recv_data = self.send_msg_and_receive(msg, sock) # Format: Register-OK<sp>cookie
         if recv_data:
-            if recv_data.endswith("OK"):
+            #print "AHHBKNKN",recv_data
+            if recv_data.split()[0].endswith("OK"):
                 self.cookie = recv_data.split()[1]
-                print "Register Message sent to the RS."
+                print "Register Successful!."
                 self.create_cookie_file()
             else:
                 print "Register response from RS: Fail."
@@ -91,17 +93,20 @@ class Client:
                 Message format: "PQuery<sp>cookie"
         '''
         sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
-        msg = "PQuery" + str(self.cookie)
+        msg = "PQuery " + str(self.cookie)
+        #print "Message Done",msg
         recv_data = self.send_msg_and_receive(msg, sock)
-        #print("PQuery message sent to the RS Server")
+        print("PQuery message sent to the RS Server")
         if recv_data:
             if recv_data.split('\n')[0].endswith("Fail"):
                 print "PQuery response from RS: Fail"
             else:
+                print("PQuery Successful!")        
                 # The Registration Server has sent a list of active peers, add them to peerlist.
-                for line in recv_data.split('\n')[1:]:  # First line will have the line PQuery-OK
-                    peer = Peer(line.split()[0], line.split()[1]) # Hostname and RFC Server port
-                    self.active_peers.append(peer)
+                if len(recv_data.split('\n')) > 1:
+                    for line in recv_data.split('\n')[1:]:  # First line will have the line PQuery-OK
+                        peer = Peer(line.split()[0], line.split()[1]) # Hostname and RFC Server port
+                        self.active_peers.append(peer)
         else:
             print "PQuery: Receiver did not send any data back." 
 

@@ -61,7 +61,7 @@ class Server_Peer:
         if client.Client.indexlist:
             for i in client.Client.indexlist:
                 if i.timer.is_alive():
-                index_str = "{0}, {1}, {2}".format(i.rfc_num, i.peer_hostname, i.rfc_title)
+                    index_str = "{0}, {1}, {2}".format(i.rfc_num, i.peer_hostname, i.rfc_title)
                 rfc_index_l.append(index_str)
         to_send = "RFC-Index\n" + '\n'.join(rfc_index_l)
         conn.send(to_send)           
