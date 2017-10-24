@@ -105,7 +105,7 @@ class Client:
                 # The Registration Server has sent a list of active peers, add them to peerlist.
                 if len(recv_data.split('\n')) > 1:
                     for line in recv_data.split('\n')[1:]:  # First line will have the line PQuery-OK
-                        peer = Peer(line.split()[0], line.split()[1]) # Hostname and RFC Server port
+                        peer = Peer(line.split()[0],int(line.split()[1])) # Hostname and RFC Server port
                         self.active_peers.append(peer)
         else:
             print "PQuery: Receiver did not send any data back." 
@@ -141,7 +141,7 @@ class Client:
             print "Leave: Receiver did not send any data back."
             
     def rfcquery(self, peer_hostname, peer_rfc_server_port):
-        sock = self.create_socket_and_connect(self.rs_hostname, self.rs_port)
+        sock = self.create_socket_and_connect(peer_hostname, peer_rfc_server_port)
         msg = "RFCQuery"
         recv_data = self.send_msg_and_receive(msg, sock)
         if recv_data:
@@ -163,9 +163,9 @@ class Client:
                     # else: Refresh the timer if the same index has been received by somebody else?
                     
             else:
-                print "PQuery response from peer with hostname {}: Fail.".format(peer_hostname)
+                print "RFCQuery response from peer with hostname {}: Fail.".format(peer_hostname)
         else:
-            print "PQuery: Receiver with hostname {} did not send any data back.".format(peer_hostname)
+            print "RFCQuery: Receiver with hostname {} did not send any data back.".format(peer_hostname)
                    
     def getrfc(self, rfc_num, peer_hostname):
         msg = "GetRFC {}".format(rfc_num)

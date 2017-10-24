@@ -39,7 +39,7 @@ class Server_Peer:
     
     def process_request(conn):
         msg = conn.recv(4096)
-        if msg.split()[0] == "RFCQuery":
+        if msg == "RFCQuery":
             self.process_rfc_query(msg, conn)
         elif msg.split()[0] == "GetRFC":
             self.process_get_rfc(msg, conn)                
@@ -63,7 +63,9 @@ class Server_Peer:
                 if i.timer.is_alive():
                     index_str = "{0}, {1}, {2}".format(i.rfc_num, i.peer_hostname, i.rfc_title)
                 rfc_index_l.append(index_str)
-        to_send = "RFC-Index\n" + '\n'.join(rfc_index_l)
+        else:
+            pass #add a message
+        to_send = "RFC-Index-OK\n" + '\n'.join(rfc_index_l)
         conn.send(to_send)           
 
     def process_get_rfc(self, msg, conn):
@@ -82,7 +84,7 @@ class Server_Peer:
             conn.send("GetRFC-Fail")
         
 def main():
-    port = 64423
+    port = 64423 # Add a port of the peer
     s = Server(port)
     s.create_and_bind_socket()
     s.main_loop()
