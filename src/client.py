@@ -10,6 +10,7 @@ import os
 import sys
 from socket import *
 from threading import Timer
+import server_peer
 
 class Client:
     def __init__(self, rs_hostname, rs_port, rfc_server_port):
@@ -128,7 +129,7 @@ class Client:
         recv_data = self.send_msg_and_receive(msg, sock)
         if recv_data:
             if recv_data.split('\n')[0].endswith("OK"):
-                ret = Server.append_indexlist(recv_data.split('\n')[1:])
+                ret = server_peer.Server_Peer.append_indexlist(recv_data.split('\n')[1:])
                 if not ret:
                     print "Local server failed to update indexlist."
                 else:

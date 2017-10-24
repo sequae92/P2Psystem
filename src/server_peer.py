@@ -54,7 +54,11 @@ class Server_Peer:
         return "TITLE" # How do we implement this?  
 
     @staticmethod
-    def append_index(self, recv_data):
+    def get_indexlist(self):
+        return Server_Peer.indexlist
+
+    @staticmethod
+    def append_indexlist(self, recv_data):
         # Assuming the client sends valid data here and handles error conditions.
         for line in lines:
             # Each line is an index.
@@ -122,7 +126,7 @@ class Server_Peer:
             for i in Server_Peer.indexlist:
                 if i.timer.is_alive():
                     index_str = "{0}, {1}, {2}".format(i.rfc_num, i.peer_hostname, i.rfc_title)
-                rfc_index_l.append(index_str)
+                    rfc_index_l.append(index_str)
         else:
             pass #add a message
         to_send = "RFC-Index-OK\n" + '\n'.join(rfc_index_l)
