@@ -10,7 +10,7 @@ rs_port = 65423
 rfc_server_port = 65406
 c = client.Client(rs_hostname,rs_port,rfc_server_port)
 c.register()
-time.sleep(10)
+time.sleep(80)
 c.pquery()
 flag = False;
 # PQuery will return a list of Active peers and store it in c.active_peers.
@@ -30,12 +30,11 @@ for i in c.active_peers:
                 init_time = time.time()
                 c.getrfc(index.rfc_num, index.peer_hostname)
                 final_time = time.time()
-                rfc_download_times[index.rfc_num] = final_time - init_time
+                rfc_download_times[index.rfc_num] = final_time - init_time + prev
+                prev = rfc_download_times[index.rfc_num]
                 print "GetRFC from PeerF to PeerA complete." 
             else:
                 print "All 50 RFCs downloaded."
             rfc_count += 1
-        cumulative_time = sum(rfc_download_times.values())
         print "Times for each RFC download in PeerF:", rfc_download_times
-        print "Cumulative download time for all RFCs in PeerF is {}".format(cumulative_time)
 
