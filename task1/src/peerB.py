@@ -7,7 +7,7 @@ import time
 
 rs_hostname = '10.0.0.1'
 rs_port = 65423
-rfc_server_port = 60002
+rfc_server_port = 65402
 c = client.Client(rs_hostname,rs_port,rfc_server_port)
 c.register()
 time.sleep(10)

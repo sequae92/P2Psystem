@@ -180,6 +180,7 @@ class Index:
  
 def main():
     port = int(sys.argv[1])
+    print "SYSARGV1:", port
     s = Server_Peer(port)
     s.create_and_bind_socket()
     s.main_loop()
