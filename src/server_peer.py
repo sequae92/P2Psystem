@@ -27,11 +27,12 @@ class Server_Peer:
             index = Index(i, rfc_title, this_hostname)
             # Create a timer object but don't start it.
             # This index is based on local RFCs so it should not be removed from indexlist.
-            index.timer = Timer(72, self.update_index_timer, [i, this_hostname])
+            index.timer = Timer(72, Server_Peer.update_index_timer, [i, this_hostname])
             Server_Peer.indexlist.append(index)
 
+    @staticmethod
     def update_index_timer(self, rfc_num, rfc_hostname):
-        index = find_index(rfc_num, rfc_hostname)
+        index = Server_Peer.find_index(rfc_num, rfc_hostname)
         if index == None:
             print "Index for hostname {0} and RFC number {1} does not exist.".format(rfc_hostname, rfc_num)
         else:
@@ -67,15 +68,19 @@ class Server_Peer:
             rfc_num =line.split()[0]
             rfc_hostname = line.split()[1]
             rfc_title = line.split()[2:]    # Title may have spaces, put it at the end.
-            if find_index(rfc_num, rfc_hostname) is None:
+            index = Server_Peer.find_index(rfc_num, rfc_hostname)
+            if index is None:
                 # If this index doesn't exist, create an Index object and append to indexlist.
                 index = Index(rfc_num, rfc_hostname, rfc_title)
-                index.timer = Timer(72, self.update_index_timer, [rfc_num, rfc_hostname])
+                index.timer = Timer(72, Server_Peer.update_index_timer, [rfc_num, rfc_hostname])
                 # Start a timer as this is potentially information about a remotely present RFC.
                 index.timer.start()
                 # Merge the new entry with the local indexlist.
                 Server_Peer.indexlist.append(index)
-            # else: Refresh the timer if the same index has been received by somebody else?         
+            else:
+                # Refresh the timer if the same index has been received by somebody else?
+                index.timer.cancel()
+                index.timer.start()
                         
     def create_and_bind_socket(self):
         try:

@@ -16,7 +16,7 @@ rfcsearch = "8266"
 for i in c.active_peers:
     if i.hostname != socket.gethostname():
         c.rfcquery(i.hostname,i.rfc_server_port)
-        for j in sp.get_indexlist():
+        for j in sp.Server_Peer.get_indexlist():
             if j.rfc_num == rfcsearch:
                 print "Peer B has required RFC!!"
                 flag = True

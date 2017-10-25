@@ -129,11 +129,7 @@ class Client:
         recv_data = self.send_msg_and_receive(msg, sock)
         if recv_data:
             if recv_data.split('\n')[0].endswith("OK"):
-                ret = server_peer.Server_Peer.append_indexlist(recv_data.split('\n')[1:])
-                if not ret:
-                    print "Local server failed to update indexlist."
-                else:
-                    print "RFC Index successfully updated by the server."
+                server_peer.Server_Peer.append_indexlist(recv_data.split('\n')[1:])
             else:
                 print "RFCQuery response from peer with hostname {}: Fail.".format(peer_hostname)
         else:
