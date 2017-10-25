@@ -23,7 +23,8 @@ class Server_Peer:
         # Get only the RFC number, for each RFC file.
         rfcfiles = map(lambda x:x[:-4], rfcfiles)
         for i in rfcfiles:
-            rfc_title = self.get_rfc_title_by_num(i)
+            #rfc_title = self.get_rfc_title_by_num(i)
+            rfc_title = "TITLE" # CHANGE THIS
             this_hostname = gethostname()
             index = Index(i, rfc_title, this_hostname)
             # Create a timer object but don't start it.

@@ -1,3 +1,3 @@
-python server_peer.py 65401 &
+python server_peer.py 60001 &
 python peerA.py
 
