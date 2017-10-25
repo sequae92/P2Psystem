@@ -7,7 +7,7 @@ import time
 
 rs_hostname = '10.0.0.1'
 rs_port = 65423
-rfc_server_port = 60002
+rfc_server_port = 65402
 c = client.Client(rs_hostname,rs_port,rfc_server_port)
 c.register()
 time.sleep(4)
@@ -28,3 +28,6 @@ for i in c.active_peers:
                 hostname = j.peer_hostname
 if flag:
     c.getrfc(rfcsearch,hostname)
+else:
+    print "Indexlist obtained did not have information about the peer with the RFC number {}.".format(rfc_to_get)
+c.leave()
