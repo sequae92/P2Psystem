@@ -10,7 +10,7 @@ rs_port = 65423
 rfc_server_port = 65402
 c = client.Client(rs_hostname,rs_port,rfc_server_port)
 c.register()
-time.sleep(80)
+time.sleep(8)
 c.pquery()
 flag = False;
 # PQuery will return a list of Active peers and store it in c.active_peers.
