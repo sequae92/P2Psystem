@@ -113,7 +113,7 @@ class Server_Peer:
 
     def shutdown_and_close(self):
         try:
-            self.sock.shutdown(socket.SHUT_RDWR)
+            self.sock.shutdown(SHUT_RDWR)
             print "Socket shutdown successfully."
         except Exception as e:
             print e.message, "Couldn't shutdown the socket on the server."
