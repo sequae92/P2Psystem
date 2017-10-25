@@ -25,9 +25,6 @@ class Client:
         else:
             self.cookie = 0
 
-    def get_rfc_title_by_num(self, num):
-        return "TITLE" # How do we implement this?    
-    
     def create_socket_and_connect(self, dest_hostname, dest_port):
         try:
             sock = socket(AF_INET, SOCK_STREAM)
