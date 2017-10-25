@@ -1,2 +1,2 @@
-cd rfc
+cd ../rfc
 rename 's/^(.{3})//' *
