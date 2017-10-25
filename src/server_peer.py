@@ -44,7 +44,8 @@ class Server_Peer:
             else:
                 print "Error: Local index expired for hostname {0} and RFC number {1}".format(rfc_hostname, rfc_num)
 
-    def find_index(self, rfc_num, rfc_hostname):
+    @staticmethod
+    def find_index(rfc_num, rfc_hostname):
         for i in Server_Peer.indexlist:
             if i.rfc_num == rfc_num and i.rfc_hostname == rfc_hostname:
                 return i
