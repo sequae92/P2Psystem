@@ -5,6 +5,8 @@ from threading import Timer
 from socket import *
 from datetime import *
 import client
+from BeautifulSoup import BeautifulSoup
+import urllib2
 
 class Server_Peer:
     indexlist = []
@@ -19,8 +21,7 @@ class Server_Peer:
         # 8266.txt: Format of the RFC text files in the rfc directory.
         # Assuming only such files exist in the rfc directory.
         # Get only the RFC number, for each RFC file.
-        map(lambda x:x[:-4], rfcfiles)
-
+        rfcfiles = map(lambda x:x[:-4], rfcfiles)
         for i in rfcfiles:
             rfc_title = self.get_rfc_title_by_num(i)
             this_hostname = gethostname()
@@ -31,29 +32,40 @@ class Server_Peer:
             Server_Peer.indexlist.append(index)
 
     @staticmethod
-    def update_index_timer(self, rfc_num, rfc_hostname):
+    def update_index_timer(rfc_num, rfc_hostname):
         index = Server_Peer.find_index(rfc_num, rfc_hostname)
         if index == None:
             print "Index for hostname {0} and RFC number {1} does not exist.".format(rfc_hostname, rfc_num)
         else:
             # Check if it is a local index or an index shared by somebody else.
             # A local index will never have a timer that is running.
+            # Only a remote index can expire and come into this function.
             if index.timer.is_alive():
+                # Timer expired, that's why it came to this function.
+                # This is an error.
                 index.timer.cancel()
+                print "Error: update_index_timer called even though timer didn't expire."
+            else:
+                # Timer has expired. Remove the remote index.
                 Server_Peer.indexlist.remove(index)
                 print "Timer expired for index with hostname {0} and RFC number {1}:".format(rfc_hostname, rfc_num)
-            else:
-                print "Error: Local index expired for hostname {0} and RFC number {1}".format(rfc_hostname, rfc_num)
 
     @staticmethod
     def find_index(rfc_num, rfc_hostname):
         for i in Server_Peer.indexlist:
-            if i.rfc_num == rfc_num and i.rfc_hostname == rfc_hostname:
+            if i.rfc_num == rfc_num and i.peer_hostname == rfc_hostname:
                 return i
         return None
     
     def get_rfc_title_by_num(self, num):
-        return "TITLE" # How do we implement this?  
+        link = "https://www.rfc-editor.org/search/rfc_search_detail.php?rfc={}".format(num)
+        f = urllib2.urlopen(link)
+        if not f:
+            return "Title not found"
+        myfile = f.read()
+        parsed_html = BeautifulSoup(myfile)
+        title = parsed_html.body.find('td', attrs={'class':"title"}).text
+        return title
 
     @staticmethod
     def get_indexlist():
@@ -62,7 +74,6 @@ class Server_Peer:
     @staticmethod
     def append_indexlist(recv_data):
         # Assuming the client sends valid data here and handles error conditions.
-        print "HERE?", recv_data
         for line in recv_data:
             # Each line is an index.
             rfc_num =line.split()[0]
@@ -71,16 +82,19 @@ class Server_Peer:
             index = Server_Peer.find_index(rfc_num, rfc_hostname)
             if index is None:
                 # If this index doesn't exist, create an Index object and append to indexlist.
-                index = Index(rfc_num, rfc_hostname, rfc_title)
-                index.timer = Timer(72, Server_Peer.update_index_timer, [rfc_num, rfc_hostname])
+                index = Index(rfc_num, rfc_title, rfc_hostname)
+                index.timer = Timer(7, Server_Peer.update_index_timer, [rfc_num, rfc_hostname])
                 # Start a timer as this is potentially information about a remotely present RFC.
-                index.timer.start()
+                #index.timer.start()
                 # Merge the new entry with the local indexlist.
                 Server_Peer.indexlist.append(index)
             else:
-                # Refresh the timer if the same index has been received by somebody else?
-                index.timer.cancel()
-                index.timer.start()
+                # Refresh the timer if the same index has been received by somebody else
+                print "Index is not None."
+                if index.timer.is_alive():
+                    # Check if timer is running first, indicating that it is a remote index.
+                    index.timer.cancel()
+                    index.timer.start()
                         
     def create_and_bind_socket(self):
         try:
@@ -132,7 +146,7 @@ class Server_Peer:
         if Server_Peer.indexlist:
             for i in Server_Peer.indexlist:
                 if i.timer:
-                    index_str = "{0}, {1}, {2}".format(i.rfc_num, i.peer_hostname, i.rfc_title)
+                    index_str = "{0} {1} {2}".format(i.rfc_num, i.peer_hostname, i.rfc_title)
                     rfc_index_l.append(index_str)
         else:
             pass #add a message

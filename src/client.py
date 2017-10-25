@@ -60,7 +60,6 @@ class Client:
         msg = "Register " + str(self.hostname) + " " + str(self.cookie) + " " + str(self.rfc_server_port)
         recv_data = self.send_msg_and_receive(msg, sock) # Format: Register-OK<sp>cookie
         if recv_data:
-            #print "AHHBKNKN",recv_data
             if recv_data.split()[0].endswith("OK"):
                 self.cookie = recv_data.split()[1]
                 print "Register Successful!."
@@ -147,26 +146,32 @@ class Client:
         else:
             print "Get RFC {}: Fail.".format(rfc_num)
             return False
-        
+
+    def get_port_from_hostname(self, peer_hostname):
+        for peer in self.active_peers:
+            if peer.hostname == peer_hostname:
+                return peer.rfc_server_port
+        return None
         
     def send_rfc_req(self, msg, peer_hostname):
         # Find the port number of the peer with peer_hostname from peerlist.
         # Send a req to the peer, get the response. If Fail, return false. If OK, return true and the data. 
-        for i in self.peerlist:
-            if i.hostname == peer_hostname:
-                sock = self.create_socket_and_connect(peer_hostname, i.rfc_server_port)
-                recv_data = self.send_msg_and_receive(msg, sock)
-                if recv_data:
-                    if recv_data.split('\n').endswith("OK"):
-                        # First line indicates the status, which is OK. Data is second line onwards.
-                        return [True, '\n'.join(recv_data.split('\n')[1:])]
-                    else:
-                        # Status is fail.
-                        print "RFC Response from peer with hostname {}: Fail.".format(peer_hostname)
-                        return [False, None]
-                else:
-                    print "RFC Response: Receiver with hostname {} did not send back any data.".format(peer_hostname)
-                    return [False, None]
+        peer_port = self.get_port_from_hostname(peer_hostname)
+        if peer_port == None:
+            print "Port for hostname {} not found.".format(peer_hostname)
+        sock = self.create_socket_and_connect(peer_hostname, peer_port)
+        recv_data = self.send_msg_and_receive(msg, sock)
+        if recv_data:
+            if recv_data.split('\n')[0].endswith("OK"):
+                # First line indicates the status, which is OK. Data is second line onwards.
+                return [True, '\n'.join(recv_data.split('\n')[1:])]
+            else:
+                # Status is fail.
+                print "RFC Response from peer with hostname {}: Fail.".format(peer_hostname)
+                return [False, None]
+        else:
+            print "RFC Response: Receiver with hostname {} did not send back any data.".format(peer_hostname)
+            return [False, None]
         print "Peer with hostname {} does not exist in the peerlist.".format(peer_hostname)
         return [False, None]
                 
