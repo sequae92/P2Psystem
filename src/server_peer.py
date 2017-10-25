@@ -60,7 +60,8 @@ class Server_Peer:
     @staticmethod
     def append_indexlist(recv_data):
         # Assuming the client sends valid data here and handles error conditions.
-        for line in lines:
+        print "HERE?", recv_data
+        for line in recv_data:
             # Each line is an index.
             rfc_num =line.split()[0]
             rfc_hostname = line.split()[1]
@@ -124,7 +125,7 @@ class Server_Peer:
         rfc_index_l = []
         if Server_Peer.indexlist:
             for i in Server_Peer.indexlist:
-                if i.timer.is_alive():
+                if i.timer:
                     index_str = "{0}, {1}, {2}".format(i.rfc_num, i.peer_hostname, i.rfc_title)
                     rfc_index_l.append(index_str)
         else:
