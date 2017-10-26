@@ -14,7 +14,7 @@ class Server_Peer:
         self.port = port
         self.hostname = ""
         self.sock = None
-        self.build_index_list()
+        self.build_init_index_list()
     
     def build_init_index_list(self):
         rfcfiles = os.listdir("../rfc")
