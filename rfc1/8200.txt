@@ -1,0 +1,66 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                        S. Deering
+Request for Comments: 8200                                       Retired
+STD: 86                                                        R. Hinden
+Obsoletes: 2460                                     Check Point Software
+Category: Standards Track                                      July 2017
+ISSN: 2070-1721
+
+
+           Internet Protocol, Version 6 (IPv6) Specification
+
+Abstract
+
+   This document specifies version 6 of the Internet Protocol (IPv6).
+   It obsoletes RFC 2460.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/info/rfc8200.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Deering & Hinden             Standards Track                    [Page 1]
+
+RFC 8200                   IPv6 Specification                  July 2017
+
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons identified as the
+   document authors.  All rights reser

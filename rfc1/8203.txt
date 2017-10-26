@@ -1,0 +1,37 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                       J. Snijders
+Request for Comments: 8203                                           NTT
+Updates: 4486                                                   J. Heitz
+Category: Standards Track                                          Cisco
+ISSN: 2070-1721                                               J. Scudder
+                                                                 Juniper
+                                                               July 2017
+
+
+               BGP Administrative Shutdown Communication
+
+Abstract
+
+   This document enhances the BGP Cease NOTIFICATION message
+   "Administrative Shutdown" and "Administrative Reset" subcodes for
+   operators to transmit a short freeform message to describe why a BGP
+   session was shutdown or reset.  This document updates RFC 4486.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/info/rfc820
