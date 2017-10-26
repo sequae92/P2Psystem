@@ -10,7 +10,7 @@ c = client.Client(rs_hostname,rs_port,rfc_server_port)
 c.register()
 time.sleep(8)
 c.pquery()
-downloaded_rfcs = {}    # A set.
+downloaded_rfcs = set()    # A set.
 # PQuery will return a list of Active peers and store it in c.active_peers.
 # Get all index lists, merge.
 # Then start a loop and look through the index list to get unique rfcs.
