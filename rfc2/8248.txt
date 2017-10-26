@@ -1,0 +1,41 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                     N. Cam-Winget
+Request for Comments: 8248                                 Cisco Systems
+Category: Informational                                      L. Lorenzin
+ISSN: 2070-1721                                             Pulse Secure
+                                                          September 2017
+
+
+   Security Automation and Continuous Monitoring (SACM) Requirements
+
+Abstract
+
+   This document defines the scope and set of requirements for the
+   Security Automation and Continuous Monitoring (SACM) architecture,
+   data model, and transfer protocols.  The requirements and scope are
+   based on the agreed-upon use cases described in RFC 7632.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Not all documents
+   approved by the IESG are a candidate for any level of Internet
+   Standard; see Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8248.
+
+Copyright Notice
+
+   Cop

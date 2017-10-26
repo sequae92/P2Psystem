@@ -1,0 +1,43 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                        P. McManus
+Request for Comments: 8246                                       Mozilla
+Category: Standards Track                                 September 2017
+ISSN: 2070-1721
+
+
+                        HTTP Immutable Responses
+
+Abstract
+
+   The immutable HTTP response Cache-Control extension allows servers to
+   identify resources that will not be updated during their freshness
+   lifetime.  This ensures that a client never needs to revalidate a
+   cached fresh resource to be certain it has not been modified.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8246.
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license

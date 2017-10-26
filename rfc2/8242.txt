@@ -1,0 +1,38 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                           J. Haas
+Request for Comments: 8242                                       Juniper
+Category: Informational                                         S. Hares
+ISSN: 2070-1721                                                   Huawei
+                                                          September 2017
+
+
+  Interface to the Routing System (I2RS) Ephemeral State Requirements
+
+Abstract
+
+   "An Architecture for the Interface to the Routing System" (RFC 7921)
+   abstractly describes a number of requirements for ephemeral state (in
+   terms of capabilities and behaviors) that any protocol suite
+   attempting to meet the needs of the Interface to the Routing System
+   (I2RS) protocol has to provide.  This document describes, in detail,
+   requirements for ephemeral state for those implementing the I2RS
+   protocol.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Not all documents
+   approved by the IESG are a candidate for any level of Internet
+   Standard; see Section 2 of RFC 7841.
+
+   Information about the curre
