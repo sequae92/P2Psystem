@@ -1,4 +1,4 @@
-#To create a peer B
+#To create PeerF
 
 import server_peer as sp
 import client
@@ -23,18 +23,19 @@ for i in c.active_peers:
         # Now that we have the hostname and port of PeerA, execute getrfc for all RFCs.
         indexlist = sp.Server_Peer.get_indexlist()
         rfc_count = 0
-        rfc_download_times = {}
+        prev = 0
         for index in indexlist:
             # PeerA has all RFCs. Download them.
             if rfc_count < 50:
                 init_time = time.time()
                 c.getrfc(index.rfc_num, index.peer_hostname)
                 final_time = time.time()
-                rfc_download_times[index.rfc_num] = final_time - init_time + prev
-                prev = rfc_download_times[index.rfc_num]
+                cur_time = final_time - init_time + prev
+                prev = cur_time
+                print "CUR TIME:", cur_time, index.rfc_num
                 print "GetRFC from PeerF to PeerA complete." 
             else:
                 print "All 50 RFCs downloaded."
+                break
             rfc_count += 1
-        print "Times for each RFC download in PeerF:", rfc_download_times
 
