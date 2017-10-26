@@ -138,6 +138,7 @@ class Client:
             with open("../rfc/{}.txt".format(rfc_num), "w") as f:
                 print "Writing RFC data to rfc/{}.txt.".format(rfc_num)
                 f.write(ret[1])
+                server_peer.Server_Peer.build_local_indexlist()
                 return True
         else:
             print "Get RFC {}: Fail.".format(rfc_num)
