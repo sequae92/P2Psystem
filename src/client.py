@@ -36,7 +36,6 @@ class Client:
     
     def send_msg_and_receive(self, msg, sock):
         sock.sendall(msg)
-        print "Sendall Done"
         try:
             data = sock.recv(8192)
         except error:
@@ -125,7 +124,8 @@ class Client:
         recv_data = self.send_msg_and_receive(msg, sock)
         if recv_data:
             if recv_data.split('\n')[0].endswith("OK"):
-                server_peer.Server_Peer.append_indexlist(recv_data.split('\n')[1:])
+                if len(recv_data.split('\n')) > 1:
+                    server_peer.Server_Peer.append_indexlist(recv_data.split('\n')[1:])
             else:
                 print "RFCQuery response from peer with hostname {}: Fail.".format(peer_hostname)
         else:
@@ -139,6 +139,7 @@ class Client:
             with open("../rfc/{}.txt".format(rfc_num), "w") as f:
                 print "Writing RFC data to rfc/{}.txt.".format(rfc_num)
                 f.write(ret[1])
+                server_peer.Server_Peer.build_local_indexlist()
                 return True
         else:
             print "Get RFC {}: Fail.".format(rfc_num)
