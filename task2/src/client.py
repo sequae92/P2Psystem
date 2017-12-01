@@ -124,7 +124,8 @@ class Client:
         recv_data = self.send_msg_and_receive(msg, sock)
         if recv_data:
             if recv_data.split('\n')[0].endswith("OK"):
-                server_peer.Server_Peer.append_indexlist(recv_data.split('\n')[1:])
+                if len(recv_data.split('\n')) > 1:
+                    server_peer.Server_Peer.append_indexlist(recv_data.split('\n')[1:])
             else:
                 print "RFCQuery response from peer with hostname {}: Fail.".format(peer_hostname)
         else:

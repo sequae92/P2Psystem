@@ -14,22 +14,44 @@ class Server_Peer:
         self.port = port
         self.hostname = ""
         self.sock = None
-        self.build_index_list()
+        self.build_init_index_list()
     
-    def build_index_list(self):
+    def build_init_index_list(self):
         rfcfiles = os.listdir("../rfc")
         # 8266.txt: Format of the RFC text files in the rfc directory.
         # Assuming only such files exist in the rfc directory.
         # Get only the RFC number, for each RFC file.
         rfcfiles = map(lambda x:x[:-4], rfcfiles)
         for i in rfcfiles:
-            rfc_title = self.get_rfc_title_by_num(i)
+            #rfc_title = self.get_rfc_title_by_num(i)
+            rfc_title = "TITLE" # CHANGE THIS
             this_hostname = gethostname()
             index = Index(i, rfc_title, this_hostname)
             # Create a timer object but don't start it.
             # This index is based on local RFCs so it should not be removed from indexlist.
-            index.timer = Timer(72, Server_Peer.update_index_timer, [i, this_hostname])
+            index.timer = Timer(7200, Server_Peer.update_index_timer, [i, this_hostname])
             Server_Peer.indexlist.append(index)
+
+    @staticmethod
+    def build_local_indexlist():
+        # When RFC are downloaded, update the Indexlist based on local files.
+        rfcfiles = os.listdir("../rfc")
+        # 8266.txt: Format of the RFC text files in the rfc directory.
+        # Assuming only such files exist in the rfc directory.
+        # Get only the RFC number, for each RFC file.
+        rfcfiles = map(lambda x:x[:-4], rfcfiles)
+        for i in rfcfiles:
+            #rfc_title = self.get_rfc_title_by_num(i)
+            rfc_title = "TITLE" # CHANGE THIS
+            this_hostname = gethostname()
+            index = Server_Peer.find_index(i, this_hostname)
+            if not index:
+                index = Index(i, rfc_title, this_hostname)
+                # Create a timer object but don't start it.
+                # This index is based on local RFCs so it should not be removed from indexlist.
+                index.timer = Timer(7200, Server_Peer.update_index_timer, [i, this_hostname])
+                Server_Peer.indexlist.append(index)
+            # else: Do nothing.
 
     @staticmethod
     def update_index_timer(rfc_num, rfc_hostname):
@@ -83,7 +105,7 @@ class Server_Peer:
             if index is None:
                 # If this index doesn't exist, create an Index object and append to indexlist.
                 index = Index(rfc_num, rfc_title, rfc_hostname)
-                index.timer = Timer(7, Server_Peer.update_index_timer, [rfc_num, rfc_hostname])
+                index.timer = Timer(7200, Server_Peer.update_index_timer, [rfc_num, rfc_hostname])
                 # Start a timer as this is potentially information about a remotely present RFC.
                 #index.timer.start()
                 # Merge the new entry with the local indexlist.

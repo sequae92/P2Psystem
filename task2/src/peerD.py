@@ -15,6 +15,9 @@ downloaded_rfcs = set()    # A set.
 # Get all index lists, merge.
 # Then start a loop and look through the index list to get unique rfcs.
 
+# For the best case, we DO NOT do rfcquery to all peers. We instead do rfcquery and getrfc in parallel, checking with our downloaded_rfcs set.
+# If we have all RFCs (60 of them), we break.
+
 for i in c.active_peers:
     # First get the Index from all.
     # Download the actual files and keep updating downloaded_rfcs.
