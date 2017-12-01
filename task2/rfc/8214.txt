@@ -1,0 +1,36 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                        S. Boutros
+Request for Comments: 8214                                        VMware
+Category: Standards Track                                     A. Sajassi
+ISSN: 2070-1721                                                 S. Salam
+                                                                   Cisco
+                                                                J. Drake
+                                                        Juniper Networks
+                                                              J. Rabadan
+                                                                   Nokia
+                                                             August 2017
+
+
+          Virtual Private Wire Service Support in Ethernet VPN
+
+Abstract
+
+   This document describes how Ethernet VPN (EVPN) can be used to
+   support the Virtual Private Wire Service (VPWS) in MPLS/IP networks.
+   EVPN accomplishes the following for VPWS: provides Single-Active as
+   well as All-Active multihoming with flow-based load-balancing,
+   eliminates the need for Pseudowire (PW) signaling, and provides fast
+   protection convergence upon node or link failure.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received pu

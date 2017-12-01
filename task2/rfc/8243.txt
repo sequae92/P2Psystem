@@ -1,0 +1,33 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                        R. Perlman
+Request for Comments: 8243                                           EMC
+Category: Informational                                  D. Eastlake 3rd
+ISSN: 2070-1721                                                 M. Zhang
+                                                                  Huawei
+                                                             A. Ghanwani
+                                                                    Dell
+                                                                 H. Zhai
+                                                                     JIT
+                                                          September 2017
+
+
+                      Alternatives for Multilevel
+          Transparent Interconnection of Lots of Links (TRILL)
+
+Abstract
+
+   Although TRILL is based on IS-IS, which supports multilevel unicast
+   routing, extending TRILL to multiple levels has challenges that are
+   not addressed by the already-existing capabilities of IS-IS.  One
+   issue is with the handling of multi-destination packet distribution
+   trees.  Other issues are with TRILL switch nicknames.  How are such
+   nicknames allocated across a multilevel TRILL network?  Do nicknames
+   need to be unique across an entire multilevel TRILL network?  Or can
+   they merely be unique within each multilevel area?
+
+   This informational do

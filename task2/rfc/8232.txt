@@ -1,0 +1,32 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                         E. Crabbe
+Request for Comments: 8232                                        Oracle
+Category: Standards Track                                       I. Minei
+ISSN: 2070-1721                                             Google, Inc.
+                                                               J. Medved
+                                                     Cisco Systems, Inc.
+                                                                R. Varga
+                                               Pantheon Technologies SRO
+                                                                X. Zhang
+                                                                D. Dhody
+                                                     Huawei Technologies
+                                                          September 2017
+
+
+       Optimizations of Label Switched Path State Synchronization
+                     Procedures for a Stateful PCE
+
+Abstract
+
+   A stateful Path Computation Element (PCE) has access to not only the
+   information disseminated by the network's Interior Gateway Protocol
+   (IGP) but also the set of active paths and their reserved resources
+   for its computation.  The additional Label Switched Path (LSP) state
+   information allows the PCE to compute constrained paths while
+   considering individual LSPs and their interactions.  This requires a
+   

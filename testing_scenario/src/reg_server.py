@@ -78,14 +78,12 @@ class Server:
 
     def process_leave(self, msg, conn):
         '''
-            Message format: "Leave<sp>hostname<sp>cookie<sp>rfc_server_port"
+            Message format: "Leave<sp>cookie"
         '''
-        hostname = msg.split()[1]
-        cookie = int(msg.split()[2])
-        rfc_server_port = msg.split()[3]
+        cookie = int(msg.split()[1])
         if self.update_records_leave(cookie):
             conn.send("Leave-OK")
-            print "Client with cookie {} Leave Processed.".format(self.cookie)
+            print "Client with cookie {} Leave Processed.".format(cookie)
              
         else:
             conn.send("Leave-Fail")
@@ -158,21 +156,21 @@ class Server:
             self.peerlist.append(peer)
         return True
         
-        def update_records_leave(self, cookie):
-            # This is a leave message from the client
-            peer = self.find_peer(cookie)
-            if not peer:
+    def update_records_leave(self, cookie):
+        # This is a leave message from the client
+        peer = self.find_peer(cookie)
+        if not peer:
+            return False
+        else:
+            if peer.flag == False:
+                # A peer that is inactive wants to leave. Return False.
                 return False
-            else:
-                if peer.flag == False:
-                    # A peer that is inactive wants to leave. Return False.
-                    return False
-                peer.flag = False
-                if peer.timer is not None:
-                    if peer.timer.is_alive():
-                        peer.timer.cancel()
-                peer.timer = None
-                return True
+            peer.flag = False
+            if peer.timer is not None:
+                if peer.timer.is_alive():
+                    peer.timer.cancel()
+            peer.timer = None
+            return True
 
     def update_timer(self, cookie):
         # This method is called after a timer expires for a peer.

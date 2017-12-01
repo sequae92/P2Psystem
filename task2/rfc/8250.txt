@@ -1,0 +1,36 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                         N. Elkins
+Request for Comments: 8250                               Inside Products
+Category: Standards Track                                    R. Hamilton
+ISSN: 2070-1721                               Chemical Abstracts Service
+                                                            M. Ackermann
+                                                           BCBS Michigan
+                                                          September 2017
+
+
+    IPv6 Performance and Diagnostic Metrics (PDM) Destination Option
+
+Abstract
+
+   To assess performance problems, this document describes optional
+   headers embedded in each packet that provide sequence numbers and
+   timing information as a basis for measurements.  Such measurements
+   may be interpreted in real time or after the fact.  This document
+   specifies the Performance and Diagnostic Metrics (PDM) Destination
+   Options header.  The field limits, calculations, and usage in
+   measurement of PDM are included in this document.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards

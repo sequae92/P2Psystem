@@ -1,0 +1,31 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                        S. Bensley
+Request for Comments: 8257                                     D. Thaler
+Category: Informational                               P. Balasubramanian
+ISSN: 2070-1721                                                Microsoft
+                                                               L. Eggert
+                                                                  NetApp
+                                                                 G. Judd
+                                                          Morgan Stanley
+                                                            October 2017
+
+
+    Data Center TCP (DCTCP): TCP Congestion Control for Data Centers
+
+Abstract
+
+   This Informational RFC describes Data Center TCP (DCTCP): a TCP
+   congestion control scheme for data-center traffic.  DCTCP extends the
+   Explicit Congestion Notification (ECN) processing to estimate the
+   fraction of bytes that encounter congestion rather than simply
+   detecting that some congestion has occurred.  DCTCP then scales the
+   TCP congestion window based on this estimate.  This method achieves
+   high-burst tolerance, low latency, and high throughput with shallow-
+   buffered switches.  This memo also discusses deployment issues
+   related to the coexistence of DCTCP and conventional TCP, discusses
+   the lack of a negotiating mechanism between sender and receiver,

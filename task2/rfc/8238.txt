@@ -1,0 +1,36 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                        L. Avramov
+Request for Comments: 8238                                        Google
+Category: Informational                                          J. Rapp
+ISSN: 2070-1721                                                   VMware
+                                                             August 2017
+
+
+                  Data Center Benchmarking Terminology
+
+Abstract
+
+   The purposes of this informational document are to establish
+   definitions and describe measurement techniques for data center
+   benchmarking, as well as to introduce new terminology applicable to
+   performance evaluations of data center network equipment.  This
+   document establishes the important concepts for benchmarking network
+   switches and routers in the data center and is a prerequisite for the
+   test methodology document (RFC 8239).  Many of these terms and
+   methods may be applicable to network equipment beyond the scope of
+   this document as the technologies originally applied in the data
+   center are deployed elsewhere.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the

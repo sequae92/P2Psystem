@@ -1,0 +1,42 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                        W. Denniss
+Request for Comments: 8252                                        Google
+BCP: 212                                                      J. Bradley
+Updates: 6749                                              Ping Identity
+Category: Best Current Practice                             October 2017
+ISSN: 2070-1721
+
+
+                       OAuth 2.0 for Native Apps
+
+Abstract
+
+   OAuth 2.0 authorization requests from native apps should only be made
+   through external user-agents, primarily the user's browser.  This
+   specification details the security and usability reasons why this is
+   the case and how native apps and authorization servers can implement
+   this best practice.
+
+Status of This Memo
+
+   This memo documents an Internet Best Current Practice.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   BCPs is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8252.
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons identified as the
+   document a

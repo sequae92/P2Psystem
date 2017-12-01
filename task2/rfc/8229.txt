@@ -1,0 +1,36 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                          T. Pauly
+Request for Comments: 8229                                    Apple Inc.
+Category: Standards Track                                      S. Touati
+ISSN: 2070-1721                                                 Ericsson
+                                                               R. Mantha
+                                                           Cisco Systems
+                                                             August 2017
+
+
+               TCP Encapsulation of IKE and IPsec Packets
+
+Abstract
+
+   This document describes a method to transport Internet Key Exchange
+   Protocol (IKE) and IPsec packets over a TCP connection for traversing
+   network middleboxes that may block IKE negotiation over UDP.  This
+   method, referred to as "TCP encapsulation", involves sending both IKE
+   packets for Security Association establishment and Encapsulating
+   Security Payload (ESP) packets over a TCP connection.  This method is
+   intended to be used as a fallback option when IKE cannot be
+   negotiated over UDP.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Furt

@@ -1,0 +1,36 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                        P. Wouters
+Request for Comments: 8221                                       Red Hat
+Obsoletes: 7321                                               D. Migault
+Category: Standards Track                                    J. Mattsson
+ISSN: 2070-1721                                                 Ericsson
+                                                                  Y. Nir
+                                                             Check Point
+                                                              T. Kivinen
+                                                            October 2017
+
+
+ Cryptographic Algorithm Implementation Requirements and Usage Guidance
+for Encapsulating Security Payload (ESP) and Authentication Header (AH)
+
+Abstract
+
+   This document replaces RFC 7321, "Cryptographic Algorithm
+   Implementation Requirements and Usage Guidance for Encapsulating
+   Security Payload (ESP) and Authentication Header (AH)".  The goal of
+   this document is to enable ESP and AH to benefit from cryptography
+   that is up to date while making IPsec interoperable.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Inter

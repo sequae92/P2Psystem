@@ -1,0 +1,43 @@
+﻿
+
+
+
+
+
+Internet Engineering Task Force (IETF)                    P. Saint-Andre
+Request for Comments: 8266                                    Jabber.org
+Obsoletes: 7700                                             October 2017
+Category: Standards Track
+ISSN: 2070-1721
+
+
+ Preparation, Enforcement, and Comparison of Internationalized Strings
+                         Representing Nicknames
+
+Abstract
+
+   This document describes methods for handling Unicode strings
+   representing memorable, human-friendly names (called "nicknames",
+   "display names", or "petnames") for people, devices, accounts,
+   websites, and other entities.  This document obsoletes RFC 7700.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8266.
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Tr

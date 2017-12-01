@@ -1,0 +1,37 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                     D. Ceccarelli
+Request for Comments: 8258                                      Ericsson
+Category: Standards Track                                      L. Berger
+ISSN: 2070-1721                                  LabN Consulting, L.L.C.
+                                                            October 2017
+
+
+                 Generalized SCSI: A Generic Structure
+          for Interface Switching Capability Descriptor (ISCD)
+            Switching Capability Specific Information (SCSI)
+
+Abstract
+
+   This document defines a generic information structure for information
+   carried in routing protocol Interface Switching Capability Descriptor
+   (ISCD) Switching Capability Specific Information (SCSI) fields.  This
+   "Generalized SCSI" can be used with routing protocols that define
+   GMPLS ISCDs and any specific technology.  This document does not
+   modify any existing technology-specific formats and is defined for
+   use in conjunction with new GMPLS Switching Capability types.  The
+   context for this document is Generalized MPLS, and the reader is
+   expected to be familiar with the GMPLS architecture and associated
+   protocol standards.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   rec

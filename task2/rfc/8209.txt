@@ -1,0 +1,32 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                       M. Reynolds
+Request for Comments: 8209                                          IPSw
+Updates: 6487                                                  S. Turner
+Category: Standards Track                                          sn3rd
+ISSN: 2070-1721                                                  S. Kent
+                                                                     BBN
+                                                          September 2017
+
+
+               A Profile for BGPsec Router Certificates,
+        Certificate Revocation Lists, and Certification Requests
+
+Abstract
+
+   This document defines a standard profile for X.509 certificates used
+   to enable validation of Autonomous System (AS) paths in the Border
+   Gateway Protocol (BGP), as part of an extension to that protocol
+   known as BGPsec.  BGP is the standard for inter-domain routing in the
+   Internet; it is the "glue" that holds the Internet together.  BGPsec
+   is being developed as one component of a solution that addresses the
+   requirement to provide security for BGP.  The goal of BGPsec is to
+   provide full AS path validation based on the use of strong
+   cryptographic primitives.  The end entity (EE) certificates specified
+   by this profile are issued to routers within an AS.  Each of these
+   certificates is issued under a Resource Public Key Infrastructure
+   (RPKI) Certi

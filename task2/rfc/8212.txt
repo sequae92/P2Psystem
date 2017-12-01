@@ -1,0 +1,40 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                          J. Mauch
+Request for Comments: 8212                                        Akamai
+Updates: 4271                                                J. Snijders
+Category: Standards Track                                            NTT
+ISSN: 2070-1721                                               G. Hankins
+                                                                   Nokia
+                                                               July 2017
+
+
+Default External BGP (EBGP) Route Propagation Behavior without Policies
+
+Abstract
+
+   This document updates RFC 4271 by defining the default behavior of a
+   BGP speaker when there is no Import or Export Policy associated with
+   an External BGP session.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/info/rfc8212.
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons identified 

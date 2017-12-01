@@ -1,0 +1,68 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                     M. Nottingham
+Request for Comments: 8288                                  October 2017
+Obsoletes: 5988
+Category: Standards Track
+ISSN: 2070-1721
+
+
+                              Web Linking
+
+Abstract
+
+   This specification defines a model for the relationships between
+   resources on the Web ("links") and the type of those relationships
+   ("link relation types").
+
+   It also defines the serialisation of such links in HTTP headers with
+   the Link header field.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8288.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Nottingham                   Standards Track                    [Page 1]
+
+RFC 8288                       Web Linking                  October 2017
+
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is sub

@@ -1,0 +1,37 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                  M. Lepinski, Ed.
+Request for Comments: 8205                                           NCF
+Category: Standards Track                                 K. Sriram, Ed.
+ISSN: 2070-1721                                                     NIST
+                                                          September 2017
+
+
+                     BGPsec Protocol Specification
+
+Abstract
+
+   This document describes BGPsec, an extension to the Border Gateway
+   Protocol (BGP) that provides security for the path of Autonomous
+   Systems (ASes) through which a BGP UPDATE message passes.  BGPsec is
+   implemented via an optional non-transitive BGP path attribute that
+   carries digital signatures produced by each AS that propagates the
+   UPDATE message.  The digital signatures provide confidence that every
+   AS on the path of ASes listed in the UPDATE message has explicitly
+   authorized the advertisement of the route.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status of this 

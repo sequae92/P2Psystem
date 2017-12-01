@@ -17,7 +17,7 @@ flag = False;
 rfc_to_get = "8266"
 for i in c.active_peers:
     if i.hostname != socket.gethostname():
-        print i.hostname,socket.gethostname()
+        #print i.hostname,socket.gethostname()
         c.rfcquery(i.hostname,i.rfc_server_port)
         print "Completed RFC Query in peer A"
         indexlist = sp.Server_Peer.get_indexlist()
@@ -31,4 +31,7 @@ if flag:
     c.getrfc(rfc_to_get,hostname)
 else:
     print "Indexlist obtained did not have information about the peer with the RFC number {}.".format(rfc_to_get)
-c.leave()
+time.sleep(5)
+c.pquery()
+for i in c.active_peers:
+    print i.hostname

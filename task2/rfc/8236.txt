@@ -1,0 +1,42 @@
+
+
+
+
+
+
+Independent Submission                                       F. Hao, Ed.
+Request for Comments: 8236                     Newcastle University (UK)
+Category: Informational                                   September 2017
+ISSN: 2070-1721
+
+
+        J-PAKE: Password-Authenticated Key Exchange by Juggling
+
+Abstract
+
+   This document specifies a Password-Authenticated Key Exchange by
+   Juggling (J-PAKE) protocol.  This protocol allows the establishment
+   of a secure end-to-end communication channel between two remote
+   parties over an insecure network solely based on a shared password,
+   without requiring a Public Key Infrastructure (PKI) or any trusted
+   third party.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This is a contribution to the RFC Series, independently of any other
+   RFC stream.  The RFC Editor has chosen to publish this document at
+   its discretion and makes no statement about its value for
+   implementation or deployment.  Documents approved for publication by
+   the RFC Editor are not a candidate for any level of Internet
+   Standard; see Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/info/rfc8236.
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons ide

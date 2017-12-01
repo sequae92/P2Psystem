@@ -1,0 +1,42 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                         W. George
+Request for Comments: 8206                                       Neustar
+Updates: 8205                                                  S. Murphy
+Category: Standards Track                                  PARSONS, Inc.
+ISSN: 2070-1721                                           September 2017
+
+
+       BGPsec Considerations for Autonomous System (AS) Migration
+
+Abstract
+
+   This document discusses considerations and methods for supporting and
+   securing a common method for Autonomous System (AS) migration within
+   the BGPsec protocol.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8206.
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documen

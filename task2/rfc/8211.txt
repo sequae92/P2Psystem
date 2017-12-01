@@ -1,0 +1,36 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                           S. Kent
+Request for Comments: 8211                              BBN Technologies
+Category: Informational                                            D. Ma
+ISSN: 2070-1721                                                     ZDNS
+                                                          September 2017
+
+
+Adverse Actions by a Certification Authority (CA) or Repository Manager
+            in the Resource Public Key Infrastructure (RPKI)
+
+Abstract
+
+   This document analyzes actions by or against a Certification
+   Authority (CA) or an independent repository manager in the RPKI that
+   can adversely affect the Internet Number Resources (INRs) associated
+   with that CA or its subordinate CAs.  The analysis is done from the
+   perspective of an affected INR holder.  The analysis is based on
+   examination of the data items in the RPKI repository, as controlled
+   by a CA (or an independent repository manager) and fetched by Relying
+   Parties (RPs).  The analysis does not purport to be comprehensive; it
+   does represent an orderly way to analyze a number of ways that errors
+   by or attacks against a CA or repository manager can affect the RPKI
+   and routing decisions based on RPKI data.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This document is a product 

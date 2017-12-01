@@ -1,0 +1,40 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                        A. Freytag
+Request for Comments: 8228                                   August 2017
+Category: Informational
+ISSN: 2070-1721
+
+
+   Guidance on Designing Label Generation Rulesets (LGRs) Supporting
+                             Variant Labels
+
+Abstract
+
+   Rules for validating identifier labels and alternate representations
+   of those labels (variants) are known as Label Generation Rulesets
+   (LGRs); they are used for the implementation of identifier systems
+   such as Internationalized Domain Names (IDNs).  This document
+   describes ways to design LGRs to support variant labels.  In
+   designing LGRs, it is important to ensure that the label generation
+   rules are consistent and well behaved in the presence of variants.
+   The design decisions can then be expressed using the XML
+   representation of LGRs that is defined in RFC 7940.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It has been approved for publication by the Internet
+   Engineering Steering Group (IESG).  Not all documents approved by the
+   IESG are a candidate for any level of Internet Standard; see
+   Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provi

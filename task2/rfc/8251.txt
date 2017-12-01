@@ -1,0 +1,41 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                         JM. Valin
+Request for Comments: 8251                           Mozilla Corporation
+Updates: 6716                                                     K. Vos
+Category: Standards Track                                        vocTone
+ISSN: 2070-1721                                             October 2017
+
+
+                    Updates to the Opus Audio Codec
+
+Abstract
+
+   This document addresses minor issues that were found in the
+   specification of the Opus audio codec in RFC 6716.  It updates the
+   normative decoder implementation included in Appendix A of RFC 6716.
+   The changes fix real and potential security-related issues, as well
+   as minor quality-related issues.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8251.
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons identified as the
+   document author

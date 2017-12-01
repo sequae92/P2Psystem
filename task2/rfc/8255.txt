@@ -1,0 +1,40 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                      N. Tomkinson
+Request for Comments: 8255                                 N. Borenstein
+Category: Standards Track                                 Mimecast, Ltd.
+ISSN: 2070-1721                                             October 2017
+
+
+                     Multiple Language Content Type
+
+Abstract
+
+   This document defines the 'multipart/multilingual' content type,
+   which is an addition to the Multipurpose Internet Mail Extensions
+   (MIME) standard.  This content type makes it possible to send one
+   message that contains multiple language versions of the same
+   information.  The translations would be identified by a language tag
+   and selected by the email client based on a user's language settings.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8255.
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons identi

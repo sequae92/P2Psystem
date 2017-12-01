@@ -1,0 +1,39 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                          M. Jones
+Request for Comments: 8230                                     Microsoft
+Category: Standards Track                                 September 2017
+ISSN: 2070-1721
+
+
+                       Using RSA Algorithms with
+           CBOR Object Signing and Encryption (COSE) Messages
+
+Abstract
+
+   The CBOR Object Signing and Encryption (COSE) specification defines
+   cryptographic message encodings using Concise Binary Object
+   Representation (CBOR).  This specification defines algorithm
+   encodings and representations enabling RSA algorithms to be used for
+   COSE messages.  Encodings are specified for the use of RSA
+   Probabilistic Signature Scheme (RSASSA-PSS) signatures, RSA
+   Encryption Scheme - Optimal Asymmetric Encryption Padding (RSAES-
+   OAEP) encryption, and RSA keys.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/inf

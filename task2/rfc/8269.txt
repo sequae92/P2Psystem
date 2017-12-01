@@ -1,0 +1,36 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                            W. Kim
+Request for Comments: 8269                                        J. Lee
+Category: Informational                                          J. Park
+ISSN: 2070-1721                                                  D. Kwon
+                                                                    NSRI
+                                                                  D. Kim
+                                                           Kookmin Univ.
+                                                            October 2017
+
+
+                  The ARIA Algorithm and Its Use with
+             the Secure Real-Time Transport Protocol (SRTP)
+
+Abstract
+
+   This document defines the use of the ARIA block cipher algorithm
+   within the Secure Real-time Transport Protocol (SRTP).  It details
+   two modes of operation (CTR and GCM) and the SRTP key derivation
+   functions for ARIA.  Additionally, this document defines DTLS-SRTP
+   protection profiles and Multimedia Internet KEYing (MIKEY) parameter
+   sets for use with ARIA.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by th

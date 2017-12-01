@@ -1,0 +1,32 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                            Y. Nir
+Request for Comments: 8247                                      Dell EMC
+Obsoletes: 4307                                               T. Kivinen
+Updates: 7296
+Category: Standards Track                                     P. Wouters
+ISSN: 2070-1721                                                  Red Hat
+                                                              D. Migault
+                                                                Ericsson
+                                                          September 2017
+
+
+        Algorithm Implementation Requirements and Usage Guidance
+        for the Internet Key Exchange Protocol Version 2 (IKEv2)
+
+Abstract
+
+   The IPsec series of protocols makes use of various cryptographic
+   algorithms in order to provide security services.  The Internet Key
+   Exchange (IKE) protocol is used to negotiate the IPsec Security
+   Association (IPsec SA) parameters, such as which algorithms should be
+   used.  To ensure interoperability between different implementations,
+   it is necessary to specify a set of algorithm implementation
+   requirements and usage guidance to ensure that there is at least one
+   algorithm that all implementations support.  This document updates
+   RFC 7296 and obsoletes RFC 4307 in defining the current algorithm
+   implementation requirements and usage guidance for IKEv2, and 

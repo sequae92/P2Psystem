@@ -1,0 +1,37 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                             J. Yi
+Request for Comments: 8218                           Ecole Polytechnique
+Category: Experimental                                        B. Parrein
+ISSN: 2070-1721                                     University of Nantes
+                                                             August 2017
+
+
+                      Multipath Extension for the
+        Optimized Link State Routing Protocol Version 2 (OLSRv2)
+
+Abstract
+
+   This document specifies a multipath extension for the Optimized Link
+   State Routing Protocol version 2 (OLSRv2) to discover multiple
+   disjoint paths for Mobile Ad Hoc Networks (MANETs).  Considering the
+   characteristics of MANETs, especially the dynamic network topology,
+   using multiple paths can increase aggregated throughput and improve
+   the reliability by avoiding single route failures.  The
+   interoperability with OLSRv2 is retained.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for examination, experimental implementation, and
+   evaluation.
+
+   This document defines an Experimental Protocol for the Internet
+   community.  This document is a product of the Internet Engineering
+   Task Force (IETF).  It represents the consensus of the IETF
+   community.  It has received public review and has been approved for
+   publication by the Internet Enginee

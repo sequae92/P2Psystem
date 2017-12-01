@@ -1,0 +1,41 @@
+
+
+
+
+
+
+Independent Submission                                    R. Pantos, Ed.
+Request for Comments: 8216                                   Apple, Inc.
+Category: Informational                                           W. May
+ISSN: 2070-1721                                       MLB Advanced Media
+                                                             August 2017
+
+
+                          HTTP Live Streaming
+
+Abstract
+
+   This document describes a protocol for transferring unbounded streams
+   of multimedia data.  It specifies the data format of the files and
+   the actions to be taken by the server (sender) and the clients
+   (receivers) of the streams.  It describes version 7 of this protocol.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This is a contribution to the RFC Series, independently of any other
+   RFC stream.  The RFC Editor has chosen to publish this document at
+   its discretion and makes no statement about its value for
+   implementation or deployment.  Documents approved for publication by
+   the RFC Editor are not a candidate for any level of Internet
+   Standard; see Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/info/rfc8216.
+
+Copyright Notice
+
+   Copyright (c) 2017

@@ -1,0 +1,39 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                          E. Rosen
+Request for Comments: 8277                        Juniper Networks, Inc.
+Obsoletes: 3107                                             October 2017
+Category: Standards Track
+ISSN: 2070-1721
+
+
+           Using BGP to Bind MPLS Labels to Address Prefixes
+
+Abstract
+
+   This document specifies a set of procedures for using BGP to
+   advertise that a specified router has bound a specified MPLS label
+   (or a specified sequence of MPLS labels organized as a contiguous
+   part of a label stack) to a specified address prefix.  This can be
+   done by sending a BGP UPDATE message whose Network Layer Reachability
+   Information field contains both the prefix and the MPLS label(s) and
+   whose Next Hop field identifies the node at which said prefix is
+   bound to said label(s).  This document obsoletes RFC 3107.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   http

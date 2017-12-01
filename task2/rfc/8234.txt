@@ -1,0 +1,36 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                           J. Ryoo
+Request for Comments: 8234                                     T. Cheung
+Updates: 7271                                                       ETRI
+Category: Standards Track                                H. van Helvoort
+ISSN: 2070-1721                                           Hai Gaoming BV
+                                                                 I. Busi
+                                                                  G. Wen
+                                                     Huawei Technologies
+                                                             August 2017
+
+
+    Updates to MPLS Transport Profile (MPLS-TP) Linear Protection in
+               Automatic Protection Switching (APS) Mode
+
+Abstract
+
+   This document contains updates to MPLS Transport Profile (MPLS-TP)
+   linear protection in Automatic Protection Switching (APS) mode
+   defined in RFC 7271.  The updates provide rules related to the
+   initialization of the Protection State Coordination (PSC) Control
+   Logic (in which the state machine resides) when operating in APS mode
+   and clarify the operation related to state transition table lookup.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   receiv

@@ -1,0 +1,44 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                           R. Bush
+Request for Comments: 8207                     Internet Initiative Japan
+BCP: 211                                                  September 2017
+Category: Best Current Practice
+ISSN: 2070-1721
+
+
+                   BGPsec Operational Considerations
+
+Abstract
+
+   Deployment of the BGPsec architecture and protocols has many
+   operational considerations.  This document attempts to collect and
+   present the most critical and universal.  Operational practices are
+   expected to evolve as BGPsec is formalized and initially deployed.
+
+Status of This Memo
+
+   This memo documents an Internet Best Current Practice.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   BCPs is available in Section 2 of RFC 7841.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/info/rfc8207.
+
+Copyright Notice
+
+   Copyright (c) 2017 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http

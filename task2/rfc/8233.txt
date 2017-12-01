@@ -1,0 +1,33 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                          D. Dhody
+Request for Comments: 8233                                         Q. Wu
+Category: Standards Track                                         Huawei
+ISSN: 2070-1721                                                V. Manral
+                                                             Nano Sec Co
+                                                                  Z. Ali
+                                                           Cisco Systems
+                                                               K. Kumaki
+                                                        KDDI Corporation
+                                                          September 2017
+
+
+Extensions to the Path Computation Element Communication Protocol (PCEP)
+          to Compute Service-Aware Label Switched Paths (LSPs)
+
+Abstract
+
+   In certain networks, such as, but not limited to, financial
+   information networks (e.g., stock market data providers), network
+   performance criteria (e.g., latency) are becoming as critical to data
+   path selection as other metrics and constraints.  These metrics are
+   associated with the Service Level Agreement (SLA) between customers
+   and service providers.  The link bandwidth utilization (the total
+   bandwidth of a link in actual use for the forwarding) is another
+   important factor to consider during path computation.
+
+   IGP Traf

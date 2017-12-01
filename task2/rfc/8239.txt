@@ -1,0 +1,38 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                        L. Avramov
+Request for Comments: 8239                                        Google
+Category: Informational                                          J. Rapp
+ISSN: 2070-1721                                                   VMware
+                                                             August 2017
+
+
+                  Data Center Benchmarking Methodology
+
+Abstract
+
+   The purpose of this informational document is to establish test and
+   evaluation methodology and measurement techniques for physical
+   network equipment in the data center.  RFC 8238 is a prerequisite for
+   this document, as it contains terminology that is considered
+   normative.  Many of these terms and methods may be applicable beyond
+   the scope of this document as the technologies originally applied in
+   the data center are deployed elsewhere.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Not all documents
+   approved by the IESG are a candidate for any level of Internet
+   Standard; see Section 2 of RFC 7841.
+
+   Information ab

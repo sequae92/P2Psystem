@@ -1,0 +1,33 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                         O. Dornon
+Request for Comments: 8220                                   J. Kotalwar
+Category: Informational                                        V. Hemige
+ISSN: 2070-1721                                                    Nokia
+                                                                  R. Qiu
+                                                              mistnet.io
+                                                                Z. Zhang
+                                                  Juniper Networks, Inc.
+                                                          September 2017
+
+
+                  Protocol Independent Multicast (PIM)
+                over Virtual Private LAN Service (VPLS)
+
+Abstract
+
+   This document describes the procedures and recommendations for
+   Virtual Private LAN Service (VPLS) Provider Edges (PEs) to facilitate
+   replication of multicast traffic to only certain ports (behind which
+   there are interested Protocol Independent Multicast (PIM) routers
+   and/or Internet Group Management Protocol (IGMP) hosts) via PIM
+   snooping and proxying.
+
+   With PIM snooping, PEs passively listen to certain PIM control
+   messages to build control and forwarding states while transparently
+   flooding those messages.  With PIM proxying, PEs do not flood PIM
+   Join/Prune messages but only generate their own and send them out of

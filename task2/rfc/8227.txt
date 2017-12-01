@@ -1,0 +1,35 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                          W. Cheng
+Request for Comments: 8227                                       L. Wang
+Category: Standards Track                                          H. Li
+ISSN: 2070-1721                                             China Mobile
+                                                         H. van Helvoort
+                                                          Hai Gaoming BV
+                                                                 J. Dong
+                                                     Huawei Technologies
+                                                             August 2017
+
+
+   MPLS-TP Shared-Ring Protection (MSRP) Mechanism for Ring Topology
+
+Abstract
+
+   This document describes requirements, architecture, and solutions for
+   MPLS-TP Shared-Ring Protection (MSRP) in a ring topology for point-
+   to-point (P2P) services.  The MSRP mechanism is described to meet the
+   ring protection requirements as described in RFC 5654.  This document
+   defines the Ring Protection Switching (RPS) protocol that is used to
+   coordinate the protection behavior of the nodes on an MPLS ring.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for

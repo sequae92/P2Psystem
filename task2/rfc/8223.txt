@@ -1,0 +1,32 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                          S. Esale
+Request for Comments: 8223                                      R. Torvi
+Updates: 7473                                           Juniper Networks
+Category: Standards Track                                       L. Jalil
+ISSN: 2070-1721                                                  Verizon
+                                                             U. Chunduri
+                                                                  Huawei
+                                                                 K. Raza
+                                                     Cisco Systems, Inc.
+                                                             August 2017
+
+
+                     Application-Aware Targeted LDP
+
+Abstract
+
+   Recent Targeted Label Distribution Protocol (tLDP) applications, such
+   as remote Loop-Free Alternates (LFAs) and BGP auto-discovered
+   pseudowires, may automatically establish a tLDP session with any
+   Label Switching Router (LSR) in a network.  The initiating LSR has
+   information about the targeted applications to administratively
+   control initiation of the session.  However, the responding LSR has
+   no such information to control acceptance of this session.  This
+   document defines a mechanism to advertise and negotiate the Targeted
+   Application Capability (TAC) during LDP session initialization.  As
+   the respo

@@ -1,0 +1,39 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                       L. Ginsberg
+Request for Comments: 8202                                    S. Previdi
+Obsoletes: 6822                                            Cisco Systems
+Category: Standards Track                                  W. Henderickx
+ISSN: 2070-1721                                                    Nokia
+                                                               June 2017
+
+
+                          IS-IS Multi-Instance
+
+Abstract
+
+   This document describes a mechanism that allows a single router to
+   share one or more circuits among multiple Intermediate System to
+   Intermediate System (IS-IS) routing protocol instances.
+
+   Multiple instances allow the isolation of resources associated with
+   each instance.  Routers will form instance-specific adjacencies.
+   Each instance can support multiple topologies.  Each topology has a
+   unique Link State Database (LSDB).  Each Protocol Data Unit (PDU)
+   will contain a new Type-Length-Value (TLV) identifying the instance
+   and the topology (or topologies) to which the PDU belongs.
+
+   This document obsoletes RFC 6822.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   
